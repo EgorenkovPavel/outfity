@@ -1,0 +1,51 @@
+name: outfity
+description: "A new Flutter project."
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.13.1
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # State management
+  flutter_bloc:
+  freezed_annotation:
+
+  # Navigation
+  go_router:
+
+  # Camera & images
+  camera:
+  image_picker:
+  flutter_image_compress:
+
+  # Local files
+  path_provider:
+  path:
+
+  # Local database
+  drift:
+  drift_flutter:
+  sqlite3_flutter_libs:
+
+  # IDs
+  uuid:
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^6.0.0
+
+  # Code generation
+  build_runner:
+  freezed:
+  drift_dev:
+
+flutter:
+
+  uses-material-design: true
