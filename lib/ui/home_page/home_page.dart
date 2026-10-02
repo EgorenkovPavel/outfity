@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:outfity/domain/interactor.dart';
+import 'package:outfity/ui/home_page/widgets/cloth_item.dart';
 
-import '../domain/models.dart';
-import 'cloth_detail_page.dart';
+import '../cloth_detail_page/cloth_detail_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -26,7 +26,7 @@ class HomePage extends StatelessWidget {
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
           ),
-          itemBuilder: (context, index) =>_ClothItem(Interactor.clothes[index]),
+          itemBuilder: (context, index) =>ClothItem(Interactor.clothes[index]),
           itemCount: Interactor.clothes.length,
         ),
       ),
@@ -37,38 +37,3 @@ class HomePage extends StatelessWidget {
   }
 }
 
-class _ClothItem extends StatelessWidget {
-
-  final Cloth cloth;
-
-  const _ClothItem(this.cloth);
-
-  void _onTap(BuildContext context){
-    Navigator.push(
-      context,
-      MaterialPageRoute<void>(
-        builder: (context) => ClothDetailPage.edit(clothId: cloth.id,),
-      ),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: InkWell(
-        onTap: () => _onTap(context),
-        child: Card(
-            child: Column(
-              children: [
-                Expanded(
-                  child: const Placeholder(),
-                ),
-                Text(cloth.title)
-              ],
-            ),
-        ),
-      ),
-    );
-  }
-}
