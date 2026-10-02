@@ -11,6 +11,11 @@ part 'cloth_detail_bloc.freezed.dart';
 sealed class ClothDetailEvent with _$ClothDetailEvent {
   const factory ClothDetailEvent.fetch({int? clothId}) = _Fetch;
 
+  const factory ClothDetailEvent.titleChanged(String title) = _TitleChanged;
+
+  const factory ClothDetailEvent.commentChanged(
+      String comment) = _CommentChanged;
+
   const factory ClothDetailEvent.changeCategory({required Category? category}) =
   _ChangeCategory;
 
@@ -42,6 +47,7 @@ abstract class ClothDetailState with _$ClothDetailState {
     required Location? location,
     required List<Category> categories,
     required List<Location> locations,
+    required bool isFirstInit,
   }) = _ClothDetailState;
 }
 
@@ -60,6 +66,7 @@ class ClothDetailBloc extends Bloc<ClothDetailEvent, ClothDetailState> {
       location: null,
       categories: [],
       locations: [],
+      isFirstInit: false,
     ),
   ) {
     on<ClothDetailEvent>(
@@ -72,6 +79,8 @@ class ClothDetailBloc extends Bloc<ClothDetailEvent, ClothDetailState> {
             saveLocation: (event) => _onSaveLocation(event, emit),
             changeCategories: (event) => _onChangeCategories(event, emit),
             changeLocations: (event) => _onChangeLocations(event, emit),
+            titleChanged: (event) => _onTitleChange(event, emit),
+            commentChanged: (event) => _onCommentChange(event, emit),
           ),
     );
 
@@ -108,6 +117,7 @@ class ClothDetailBloc extends Bloc<ClothDetailEvent, ClothDetailState> {
           comment: cloth?.comment ?? '',
           category: category,
           location: location,
+          isFirstInit: true,
         ),
       );
     }
@@ -148,5 +158,21 @@ class ClothDetailBloc extends Bloc<ClothDetailEvent, ClothDetailState> {
 
   void _onChangeLocations(_ChangeLocations event, Emitter<ClothDetailState> emit) {
     emit(state.copyWith(locations: event.locations));
+  }
+
+  void _onTitleChange(_TitleChanged event, Emitter<ClothDetailState> emit) {
+    emit(
+      state.copyWith(
+        title: event.title,
+      ),
+    );
+  }
+
+  void _onCommentChange(_CommentChanged event, Emitter<ClothDetailState> emit) {
+    emit(
+      state.copyWith(
+        comment: event.comment,
+      ),
+    );
   }
 }

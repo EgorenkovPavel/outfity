@@ -4,9 +4,10 @@ class InputField extends StatelessWidget {
   final TextEditingController controller;
   final String title;
   final int lines;
+  final void Function(String) onChanged;
 
-  const InputField(
-      {super.key, required this.controller, required this.title, required this.lines});
+  const InputField({super.key, required this.controller,
+    required this.title, required this.lines, required this.onChanged,});
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +24,8 @@ class InputField extends StatelessWidget {
                   .of(context)
                   .primaryColor)),
           labelText: title, // TODO
-        ));
+        ),
+      onChanged: onChanged,
+    );
   }
 }

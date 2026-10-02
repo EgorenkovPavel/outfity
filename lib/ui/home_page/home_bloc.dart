@@ -22,7 +22,6 @@ abstract class HomeState with _$HomeState {
 class HomeBloc extends Bloc<HomeEvent, HomeState>{
 
   final Repository _repository;
-  StreamSubscription? _clothSubscription;
 
   HomeBloc({required this._repository}) :super(HomeState(clothes: [])){
     on<HomeEvent>(
@@ -30,15 +29,16 @@ class HomeBloc extends Bloc<HomeEvent, HomeState>{
     );
   }
 
-  void _onFetch(_Fetch event, Emitter<HomeState> emit) {
-    _clothSubscription = _repository.watchClothes().listen((clothes){
-      emit(state.copyWith(clothes: clothes));
-    });
+  Future<void> _onFetch(_Fetch event, Emitter<HomeState> emit) async {
+    await emit.forEach<List<Cloth>>(
+      _repository.watchClothes(),
+      onData: (clothes) {
+        return state.copyWith(
+          clothes: clothes,
+        );
+      },
+    );
+
   }
 
-  @override
-  Future<void> close() {
-    _clothSubscription?.cancel();
-    return super.close();
-  }
 }
