@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:outfity/ui/shared/image_placeholder.dart';
 
 import '../../../domain/models.dart';
-import '../../cloth_detail_page/cloth_detail_page.dart';
 
 class ClothItem extends StatelessWidget {
   final Cloth cloth;
@@ -10,12 +10,7 @@ class ClothItem extends StatelessWidget {
   const ClothItem(this.cloth, {super.key});
 
   void _onTap(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute<void>(
-        builder: (context) => ClothDetailPage.edit(clothId: cloth.id),
-      ),
-    );
+    context.push('/clothes/${cloth.id}');
   }
 
   @override

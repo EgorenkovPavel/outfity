@@ -1,23 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:outfity/domain/interactor.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:outfity/ui/home_page/home_bloc.dart';
 import 'package:outfity/ui/home_page/widgets/cloth_item.dart';
-
-import '../cloth_detail_page/cloth_detail_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   void _onAddPress(BuildContext context){
-    Navigator.push(
-      context,
-      MaterialPageRoute<void>(
-        builder: (context) => const ClothDetailPage.input(),
-      ),
-    );
+    context.push('/add');
   }
 
   @override
   Widget build(BuildContext context) {
+    final clothes = context.watch<HomeBloc>().state.clothes;
     return Scaffold(
       appBar: AppBar(title: Text('Outfity'),),
       body: Padding(
@@ -26,8 +22,8 @@ class HomePage extends StatelessWidget {
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
           ),
-          itemBuilder: (context, index) =>ClothItem(Interactor.clothes[index]),
-          itemCount: Interactor.clothes.length,
+          itemBuilder: (context, index) =>ClothItem(clothes[index]),
+          itemCount: clothes.length,
         ),
       ),
       floatingActionButton: FloatingActionButton(

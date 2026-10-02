@@ -1,9 +1,9 @@
 class Cloth {
-  final String id;
+  final int id;
   final String title;
   final String imagePath;
-  final String categoryId;
-  final String locationId;
+  final int? categoryId;
+  final int? locationId;
   final String comment;
 
   Cloth({
@@ -17,14 +17,14 @@ class Cloth {
 }
 
 class Category {
-  final String id;
+  final int id;
   final String title;
 
   Category({required this.id, required this.title});
 }
 
 class Location {
-  final String id;
+  final int id;
   final String title;
 
   Location({required this.id, required this.title});

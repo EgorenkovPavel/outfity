@@ -1,21 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:outfity/ui/home_page/home_page.dart';
 
-void main() {
-  runApp(const MyApp());
+import 'app/app.dart';
+import 'core/injection.dart';
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await configureDependencies();
+
+  runApp(const App());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Outfity',
-      theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.deepPurple)),
-      home: HomePage(),
-    );
-  }
-}
 
 
