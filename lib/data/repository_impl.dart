@@ -15,7 +15,7 @@ class RepositoryImpl implements Repository {
       title: 'TShort',
       categoryId: 1,
       locationId: 2,
-      imagePath: '',
+      imagePath: null,
       comment: '',
     ),
     Cloth(
@@ -23,7 +23,7 @@ class RepositoryImpl implements Repository {
       title: 'TShort',
       categoryId: null,
       locationId: null,
-      imagePath: '',
+      imagePath: null,
       comment: '',
     ),
     Cloth(
@@ -31,7 +31,7 @@ class RepositoryImpl implements Repository {
       title: 'TShort',
       categoryId: null,
       locationId: null,
-      imagePath: '',
+      imagePath: null,
       comment: '',
     ),
   ];

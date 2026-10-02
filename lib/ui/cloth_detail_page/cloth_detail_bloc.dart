@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:outfity/core/photo_service.dart';
 import 'package:outfity/domain/models.dart';
 import 'package:outfity/domain/repository.dart';
 
@@ -28,6 +30,9 @@ sealed class ClothDetailEvent with _$ClothDetailEvent {
   const factory ClothDetailEvent.saveLocation({required String title}) =
   _SaveLocation;
 
+  const factory ClothDetailEvent.saveCloth() =
+  _SaveCloth;
+
   const factory ClothDetailEvent.changeCategories(
       {required List<Category> categories}) =
   _ChangeCategories;
@@ -35,10 +40,15 @@ sealed class ClothDetailEvent with _$ClothDetailEvent {
   const factory ClothDetailEvent.changeLocations(
       {required List<Location> locations}) =
   _ChangeLocations;
+
+  const factory ClothDetailEvent.takePhoto({required XFile photo}) =
+  _TakePhoto;
 }
 
 @freezed
 abstract class ClothDetailState with _$ClothDetailState {
+  const ClothDetailState._();
+
   const factory ClothDetailState({
     required String pageTitle,
     required String title,
@@ -48,15 +58,27 @@ abstract class ClothDetailState with _$ClothDetailState {
     required List<Category> categories,
     required List<Location> locations,
     required bool isFirstInit,
+    String? imagePath, // путь к уже сохраненному фото
+    XFile? selectedPhoto, // только что снятое фото
   }) = _ClothDetailState;
+
+  String? get viewPhoto {
+    if (selectedPhoto != null) {
+      return selectedPhoto!.path;
+    } else {
+      return imagePath;
+    }
+  }
 }
 
 class ClothDetailBloc extends Bloc<ClothDetailEvent, ClothDetailState> {
   final Repository _repository;
+  final PhotoService _photoService;
+
   StreamSubscription? _categorySubscription;
   StreamSubscription? _locationSubscription;
 
-  ClothDetailBloc({required this._repository})
+  ClothDetailBloc({required this._repository, required this._photoService})
       : super(
     ClothDetailState(
       pageTitle: '',
@@ -81,6 +103,8 @@ class ClothDetailBloc extends Bloc<ClothDetailEvent, ClothDetailState> {
             changeLocations: (event) => _onChangeLocations(event, emit),
             titleChanged: (event) => _onTitleChange(event, emit),
             commentChanged: (event) => _onCommentChange(event, emit),
+            takePhoto: (event) => _onTakePhoto(event, emit),
+            saveCloth: (event) => _onSaveCloth(event, emit),
           ),
     );
 
@@ -115,6 +139,7 @@ class ClothDetailBloc extends Bloc<ClothDetailEvent, ClothDetailState> {
           pageTitle: 'Edit',
           title: cloth?.title ?? '',
           comment: cloth?.comment ?? '',
+          imagePath: cloth?.imagePath,
           category: category,
           location: location,
           isFirstInit: true,
@@ -174,5 +199,19 @@ class ClothDetailBloc extends Bloc<ClothDetailEvent, ClothDetailState> {
         comment: event.comment,
       ),
     );
+  }
+
+  void _onTakePhoto(_TakePhoto event, Emitter<ClothDetailState> emit) {
+    emit(state.copyWith(selectedPhoto: event.photo));
+  }
+
+  void _onSaveCloth(_SaveCloth event, Emitter<ClothDetailState> emit) {
+
+    // TODO
+
+
+    // if (state.selectedPhoto != null){
+    //   _photoService.save(state.selectedPhoto, clothId: clothId)
+    // }
   }
 }

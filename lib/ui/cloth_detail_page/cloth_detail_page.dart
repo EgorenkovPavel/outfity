@@ -37,9 +37,9 @@ class _ClothDetailPageState extends State<ClothDetailPage> {
     super.dispose();
   }
 
-  void onImageChoose(BuildContext context) {
+  Future<void> onImageChoose(BuildContext context) async {
     final picker = ImagePicker(); // TODO in di
-    showModalBottomSheet<void>(
+    final source = await showModalBottomSheet<ImageSource>(
       context: context,
       builder: (context) {
         return SafeArea(
@@ -49,36 +49,36 @@ class _ClothDetailPageState extends State<ClothDetailPage> {
                 leading: const Icon(Icons.camera_alt),
                 title: const Text('Take photo'), // TODO
                 onTap: () async {
-                  Navigator.pop(context);
-
-
-                  final image = await picker.pickImage(
-                    source: ImageSource.camera,
-                  );
-
-                  if (image != null) {
-                    // TODO: сохранить выбранное изображение
-                  }
+                  Navigator.pop(context, ImageSource.camera);
                 },
               ),
               ListTile(
                 leading: const Icon(Icons.photo_library),
                 title: const Text('Choose from gallery'), // TODO
                 onTap: () async {
-                  Navigator.pop(context);
-                  final image = await picker.pickImage(
-                    source: ImageSource.gallery,
-                  );
-
-                  if (image != null) {
-                    // TODO: сохранить выбранное изображение
-                  }
+                  Navigator.pop(context, ImageSource.gallery);
                 },
               ),
             ],
           ),
         );
       },
+    );
+
+    if (!mounted || source == null) {
+      return;
+    }
+
+    final image = await picker.pickImage(
+      source: source,
+    );
+
+    if (!mounted || image == null) {
+      return;
+    }
+
+    context.read<ClothDetailBloc>().add(
+      ClothDetailEvent.takePhoto(photo: image),
     );
   }
 
@@ -193,7 +193,8 @@ class _ClothDetailPageState extends State<ClothDetailPage> {
                 children: [
                   AspectRatio(aspectRatio: 1,
                       child: ImagePlaceholder(
-                        onTap: () => onImageChoose(context),)),
+                        onTap: () => onImageChoose(context),
+                      imagePath: context.watch<ClothDetailBloc>().state.viewPhoto )),
                   SizedBox(height: 16.0,),
                   InputField(
                     controller: _titleController,
@@ -261,8 +262,6 @@ class _ClothDetailPageState extends State<ClothDetailPage> {
             ],
           ),
         ));
-
-    ;
   }
 }
 

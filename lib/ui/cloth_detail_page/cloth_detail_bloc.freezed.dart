@@ -56,7 +56,7 @@ extension ClothDetailEventPatterns on ClothDetailEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Fetch value)?  fetch,TResult Function( _TitleChanged value)?  titleChanged,TResult Function( _CommentChanged value)?  commentChanged,TResult Function( _ChangeCategory value)?  changeCategory,TResult Function( _ChangeLocation value)?  changeLocation,TResult Function( _SaveCategory value)?  saveCategory,TResult Function( _SaveLocation value)?  saveLocation,TResult Function( _ChangeCategories value)?  changeCategories,TResult Function( _ChangeLocations value)?  changeLocations,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Fetch value)?  fetch,TResult Function( _TitleChanged value)?  titleChanged,TResult Function( _CommentChanged value)?  commentChanged,TResult Function( _ChangeCategory value)?  changeCategory,TResult Function( _ChangeLocation value)?  changeLocation,TResult Function( _SaveCategory value)?  saveCategory,TResult Function( _SaveLocation value)?  saveLocation,TResult Function( _SaveCloth value)?  saveCloth,TResult Function( _ChangeCategories value)?  changeCategories,TResult Function( _ChangeLocations value)?  changeLocations,TResult Function( _TakePhoto value)?  takePhoto,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _Fetch() when fetch != null:
@@ -66,9 +66,11 @@ return commentChanged(_that);case _ChangeCategory() when changeCategory != null:
 return changeCategory(_that);case _ChangeLocation() when changeLocation != null:
 return changeLocation(_that);case _SaveCategory() when saveCategory != null:
 return saveCategory(_that);case _SaveLocation() when saveLocation != null:
-return saveLocation(_that);case _ChangeCategories() when changeCategories != null:
+return saveLocation(_that);case _SaveCloth() when saveCloth != null:
+return saveCloth(_that);case _ChangeCategories() when changeCategories != null:
 return changeCategories(_that);case _ChangeLocations() when changeLocations != null:
-return changeLocations(_that);case _:
+return changeLocations(_that);case _TakePhoto() when takePhoto != null:
+return takePhoto(_that);case _:
   return orElse();
 
 }
@@ -86,7 +88,7 @@ return changeLocations(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Fetch value)  fetch,required TResult Function( _TitleChanged value)  titleChanged,required TResult Function( _CommentChanged value)  commentChanged,required TResult Function( _ChangeCategory value)  changeCategory,required TResult Function( _ChangeLocation value)  changeLocation,required TResult Function( _SaveCategory value)  saveCategory,required TResult Function( _SaveLocation value)  saveLocation,required TResult Function( _ChangeCategories value)  changeCategories,required TResult Function( _ChangeLocations value)  changeLocations,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Fetch value)  fetch,required TResult Function( _TitleChanged value)  titleChanged,required TResult Function( _CommentChanged value)  commentChanged,required TResult Function( _ChangeCategory value)  changeCategory,required TResult Function( _ChangeLocation value)  changeLocation,required TResult Function( _SaveCategory value)  saveCategory,required TResult Function( _SaveLocation value)  saveLocation,required TResult Function( _SaveCloth value)  saveCloth,required TResult Function( _ChangeCategories value)  changeCategories,required TResult Function( _ChangeLocations value)  changeLocations,required TResult Function( _TakePhoto value)  takePhoto,}){
 final _that = this;
 switch (_that) {
 case _Fetch():
@@ -96,9 +98,11 @@ return commentChanged(_that);case _ChangeCategory():
 return changeCategory(_that);case _ChangeLocation():
 return changeLocation(_that);case _SaveCategory():
 return saveCategory(_that);case _SaveLocation():
-return saveLocation(_that);case _ChangeCategories():
+return saveLocation(_that);case _SaveCloth():
+return saveCloth(_that);case _ChangeCategories():
 return changeCategories(_that);case _ChangeLocations():
-return changeLocations(_that);}
+return changeLocations(_that);case _TakePhoto():
+return takePhoto(_that);}
 }
 /// A variant of `map` that fallback to returning `null`.
 ///
@@ -112,7 +116,7 @@ return changeLocations(_that);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Fetch value)?  fetch,TResult? Function( _TitleChanged value)?  titleChanged,TResult? Function( _CommentChanged value)?  commentChanged,TResult? Function( _ChangeCategory value)?  changeCategory,TResult? Function( _ChangeLocation value)?  changeLocation,TResult? Function( _SaveCategory value)?  saveCategory,TResult? Function( _SaveLocation value)?  saveLocation,TResult? Function( _ChangeCategories value)?  changeCategories,TResult? Function( _ChangeLocations value)?  changeLocations,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Fetch value)?  fetch,TResult? Function( _TitleChanged value)?  titleChanged,TResult? Function( _CommentChanged value)?  commentChanged,TResult? Function( _ChangeCategory value)?  changeCategory,TResult? Function( _ChangeLocation value)?  changeLocation,TResult? Function( _SaveCategory value)?  saveCategory,TResult? Function( _SaveLocation value)?  saveLocation,TResult? Function( _SaveCloth value)?  saveCloth,TResult? Function( _ChangeCategories value)?  changeCategories,TResult? Function( _ChangeLocations value)?  changeLocations,TResult? Function( _TakePhoto value)?  takePhoto,}){
 final _that = this;
 switch (_that) {
 case _Fetch() when fetch != null:
@@ -122,9 +126,11 @@ return commentChanged(_that);case _ChangeCategory() when changeCategory != null:
 return changeCategory(_that);case _ChangeLocation() when changeLocation != null:
 return changeLocation(_that);case _SaveCategory() when saveCategory != null:
 return saveCategory(_that);case _SaveLocation() when saveLocation != null:
-return saveLocation(_that);case _ChangeCategories() when changeCategories != null:
+return saveLocation(_that);case _SaveCloth() when saveCloth != null:
+return saveCloth(_that);case _ChangeCategories() when changeCategories != null:
 return changeCategories(_that);case _ChangeLocations() when changeLocations != null:
-return changeLocations(_that);case _:
+return changeLocations(_that);case _TakePhoto() when takePhoto != null:
+return takePhoto(_that);case _:
   return null;
 
 }
@@ -141,7 +147,7 @@ return changeLocations(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( int? clothId)?  fetch,TResult Function( String title)?  titleChanged,TResult Function( String comment)?  commentChanged,TResult Function( Category? category)?  changeCategory,TResult Function( Location? location)?  changeLocation,TResult Function( String title)?  saveCategory,TResult Function( String title)?  saveLocation,TResult Function( List<Category> categories)?  changeCategories,TResult Function( List<Location> locations)?  changeLocations,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( int? clothId)?  fetch,TResult Function( String title)?  titleChanged,TResult Function( String comment)?  commentChanged,TResult Function( Category? category)?  changeCategory,TResult Function( Location? location)?  changeLocation,TResult Function( String title)?  saveCategory,TResult Function( String title)?  saveLocation,TResult Function()?  saveCloth,TResult Function( List<Category> categories)?  changeCategories,TResult Function( List<Location> locations)?  changeLocations,TResult Function( XFile photo)?  takePhoto,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Fetch() when fetch != null:
 return fetch(_that.clothId);case _TitleChanged() when titleChanged != null:
@@ -150,9 +156,11 @@ return commentChanged(_that.comment);case _ChangeCategory() when changeCategory 
 return changeCategory(_that.category);case _ChangeLocation() when changeLocation != null:
 return changeLocation(_that.location);case _SaveCategory() when saveCategory != null:
 return saveCategory(_that.title);case _SaveLocation() when saveLocation != null:
-return saveLocation(_that.title);case _ChangeCategories() when changeCategories != null:
+return saveLocation(_that.title);case _SaveCloth() when saveCloth != null:
+return saveCloth();case _ChangeCategories() when changeCategories != null:
 return changeCategories(_that.categories);case _ChangeLocations() when changeLocations != null:
-return changeLocations(_that.locations);case _:
+return changeLocations(_that.locations);case _TakePhoto() when takePhoto != null:
+return takePhoto(_that.photo);case _:
   return orElse();
 
 }
@@ -170,7 +178,7 @@ return changeLocations(_that.locations);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( int? clothId)  fetch,required TResult Function( String title)  titleChanged,required TResult Function( String comment)  commentChanged,required TResult Function( Category? category)  changeCategory,required TResult Function( Location? location)  changeLocation,required TResult Function( String title)  saveCategory,required TResult Function( String title)  saveLocation,required TResult Function( List<Category> categories)  changeCategories,required TResult Function( List<Location> locations)  changeLocations,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( int? clothId)  fetch,required TResult Function( String title)  titleChanged,required TResult Function( String comment)  commentChanged,required TResult Function( Category? category)  changeCategory,required TResult Function( Location? location)  changeLocation,required TResult Function( String title)  saveCategory,required TResult Function( String title)  saveLocation,required TResult Function()  saveCloth,required TResult Function( List<Category> categories)  changeCategories,required TResult Function( List<Location> locations)  changeLocations,required TResult Function( XFile photo)  takePhoto,}) {final _that = this;
 switch (_that) {
 case _Fetch():
 return fetch(_that.clothId);case _TitleChanged():
@@ -179,9 +187,11 @@ return commentChanged(_that.comment);case _ChangeCategory():
 return changeCategory(_that.category);case _ChangeLocation():
 return changeLocation(_that.location);case _SaveCategory():
 return saveCategory(_that.title);case _SaveLocation():
-return saveLocation(_that.title);case _ChangeCategories():
+return saveLocation(_that.title);case _SaveCloth():
+return saveCloth();case _ChangeCategories():
 return changeCategories(_that.categories);case _ChangeLocations():
-return changeLocations(_that.locations);}
+return changeLocations(_that.locations);case _TakePhoto():
+return takePhoto(_that.photo);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -195,7 +205,7 @@ return changeLocations(_that.locations);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( int? clothId)?  fetch,TResult? Function( String title)?  titleChanged,TResult? Function( String comment)?  commentChanged,TResult? Function( Category? category)?  changeCategory,TResult? Function( Location? location)?  changeLocation,TResult? Function( String title)?  saveCategory,TResult? Function( String title)?  saveLocation,TResult? Function( List<Category> categories)?  changeCategories,TResult? Function( List<Location> locations)?  changeLocations,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( int? clothId)?  fetch,TResult? Function( String title)?  titleChanged,TResult? Function( String comment)?  commentChanged,TResult? Function( Category? category)?  changeCategory,TResult? Function( Location? location)?  changeLocation,TResult? Function( String title)?  saveCategory,TResult? Function( String title)?  saveLocation,TResult? Function()?  saveCloth,TResult? Function( List<Category> categories)?  changeCategories,TResult? Function( List<Location> locations)?  changeLocations,TResult? Function( XFile photo)?  takePhoto,}) {final _that = this;
 switch (_that) {
 case _Fetch() when fetch != null:
 return fetch(_that.clothId);case _TitleChanged() when titleChanged != null:
@@ -204,9 +214,11 @@ return commentChanged(_that.comment);case _ChangeCategory() when changeCategory 
 return changeCategory(_that.category);case _ChangeLocation() when changeLocation != null:
 return changeLocation(_that.location);case _SaveCategory() when saveCategory != null:
 return saveCategory(_that.title);case _SaveLocation() when saveLocation != null:
-return saveLocation(_that.title);case _ChangeCategories() when changeCategories != null:
+return saveLocation(_that.title);case _SaveCloth() when saveCloth != null:
+return saveCloth();case _ChangeCategories() when changeCategories != null:
 return changeCategories(_that.categories);case _ChangeLocations() when changeLocations != null:
-return changeLocations(_that.locations);case _:
+return changeLocations(_that.locations);case _TakePhoto() when takePhoto != null:
+return takePhoto(_that.photo);case _:
   return null;
 
 }
@@ -693,6 +705,38 @@ as String,
 /// @nodoc
 
 
+class _SaveCloth implements ClothDetailEvent {
+  const _SaveCloth();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _SaveCloth);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+    return 'ClothDetailEvent.saveCloth()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
 class _ChangeCategories implements ClothDetailEvent {
   const _ChangeCategories({required  List<Category> categories}): _categories = categories;
   
@@ -839,9 +883,77 @@ as List<Location>,
 }
 
 /// @nodoc
+
+
+class _TakePhoto implements ClothDetailEvent {
+  const _TakePhoto({required this.photo});
+  
+
+ final  XFile photo;
+
+/// Create a copy of ClothDetailEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$TakePhotoCopyWith<_TakePhoto> get copyWith => __$TakePhotoCopyWithImpl<_TakePhoto>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _TakePhoto&&(identical(other.photo, photo) || other.photo == photo));
+}
+
+
+@override
+int get hashCode {
+    return Object.hash(runtimeType,photo);
+}
+
+@override
+String toString() {
+    return 'ClothDetailEvent.takePhoto(photo: $photo)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$TakePhotoCopyWith<$Res> implements $ClothDetailEventCopyWith<$Res> {
+  factory _$TakePhotoCopyWith(_TakePhoto value, $Res Function(_TakePhoto) _then) = __$TakePhotoCopyWithImpl;
+@useResult
+$Res call({
+ XFile photo
+});
+
+
+
+
+}
+/// @nodoc
+class __$TakePhotoCopyWithImpl<$Res>
+    implements _$TakePhotoCopyWith<$Res> {
+  __$TakePhotoCopyWithImpl(this._self, this._then);
+
+  final _TakePhoto _self;
+  final $Res Function(_TakePhoto) _then;
+
+/// Create a copy of ClothDetailEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? photo = null,}) {
+  return _then(_TakePhoto(
+photo: null == photo ? _self.photo : photo // ignore: cast_nullable_to_non_nullable
+as XFile,
+  ));
+}
+
+
+}
+
+/// @nodoc
 mixin _$ClothDetailState {
 
- String get pageTitle; String get title; String get comment; Category? get category; Location? get location; List<Category> get categories; List<Location> get locations; bool get isFirstInit;
+ String get pageTitle; String get title; String get comment; Category? get category; Location? get location; List<Category> get categories; List<Location> get locations; bool get isFirstInit; String? get imagePath; XFile? get selectedPhoto;
 /// Create a copy of ClothDetailState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -853,20 +965,20 @@ $ClothDetailStateCopyWith<ClothDetailState> get copyWith => _$ClothDetailStateCo
 @override
 bool operator ==(Object other) {
   final _this = this as ClothDetailState;
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ClothDetailState&&(identical(other.pageTitle, _this.pageTitle) || other.pageTitle == _this.pageTitle)&&(identical(other.title, _this.title) || other.title == _this.title)&&(identical(other.comment, _this.comment) || other.comment == _this.comment)&&(identical(other.category, _this.category) || other.category == _this.category)&&(identical(other.location, _this.location) || other.location == _this.location)&&const DeepCollectionEquality().equals(other.categories, _this.categories)&&const DeepCollectionEquality().equals(other.locations, _this.locations)&&(identical(other.isFirstInit, _this.isFirstInit) || other.isFirstInit == _this.isFirstInit));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ClothDetailState&&(identical(other.pageTitle, _this.pageTitle) || other.pageTitle == _this.pageTitle)&&(identical(other.title, _this.title) || other.title == _this.title)&&(identical(other.comment, _this.comment) || other.comment == _this.comment)&&(identical(other.category, _this.category) || other.category == _this.category)&&(identical(other.location, _this.location) || other.location == _this.location)&&const DeepCollectionEquality().equals(other.categories, _this.categories)&&const DeepCollectionEquality().equals(other.locations, _this.locations)&&(identical(other.isFirstInit, _this.isFirstInit) || other.isFirstInit == _this.isFirstInit)&&(identical(other.imagePath, _this.imagePath) || other.imagePath == _this.imagePath)&&(identical(other.selectedPhoto, _this.selectedPhoto) || other.selectedPhoto == _this.selectedPhoto));
 }
 
 
 @override
 int get hashCode {
   final _this = this as ClothDetailState;
-  return Object.hash(runtimeType,_this.pageTitle,_this.title,_this.comment,_this.category,_this.location,const DeepCollectionEquality().hash(_this.categories),const DeepCollectionEquality().hash(_this.locations),_this.isFirstInit);
+  return Object.hash(runtimeType,_this.pageTitle,_this.title,_this.comment,_this.category,_this.location,const DeepCollectionEquality().hash(_this.categories),const DeepCollectionEquality().hash(_this.locations),_this.isFirstInit,_this.imagePath,_this.selectedPhoto);
 }
 
 @override
 String toString() {
   final _this = this as ClothDetailState;
-  return 'ClothDetailState(pageTitle: ${_this.pageTitle}, title: ${_this.title}, comment: ${_this.comment}, category: ${_this.category}, location: ${_this.location}, categories: ${_this.categories}, locations: ${_this.locations}, isFirstInit: ${_this.isFirstInit})';
+  return 'ClothDetailState(pageTitle: ${_this.pageTitle}, title: ${_this.title}, comment: ${_this.comment}, category: ${_this.category}, location: ${_this.location}, categories: ${_this.categories}, locations: ${_this.locations}, isFirstInit: ${_this.isFirstInit}, imagePath: ${_this.imagePath}, selectedPhoto: ${_this.selectedPhoto})';
 }
 
 
@@ -877,7 +989,7 @@ abstract mixin class $ClothDetailStateCopyWith<$Res>  {
   factory $ClothDetailStateCopyWith(ClothDetailState value, $Res Function(ClothDetailState) _then) = _$ClothDetailStateCopyWithImpl;
 @useResult
 $Res call({
- String pageTitle, String title, String comment, Category? category, Location? location, List<Category> categories, List<Location> locations, bool isFirstInit
+ String pageTitle, String title, String comment, Category? category, Location? location, List<Category> categories, List<Location> locations, bool isFirstInit, String? imagePath, XFile? selectedPhoto
 });
 
 
@@ -894,7 +1006,7 @@ class _$ClothDetailStateCopyWithImpl<$Res>
 
 /// Create a copy of ClothDetailState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? pageTitle = null,Object? title = null,Object? comment = null,Object? category = freezed,Object? location = freezed,Object? categories = null,Object? locations = null,Object? isFirstInit = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? pageTitle = null,Object? title = null,Object? comment = null,Object? category = freezed,Object? location = freezed,Object? categories = null,Object? locations = null,Object? isFirstInit = null,Object? imagePath = freezed,Object? selectedPhoto = freezed,}) {
   return _then(ClothDetailState(
 pageTitle: null == pageTitle ? _self.pageTitle : pageTitle // ignore: cast_nullable_to_non_nullable
 as String,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
@@ -904,7 +1016,9 @@ as Category?,location: freezed == location ? _self.location : location // ignore
 as Location?,categories: null == categories ? _self.categories : categories // ignore: cast_nullable_to_non_nullable
 as List<Category>,locations: null == locations ? _self.locations : locations // ignore: cast_nullable_to_non_nullable
 as List<Location>,isFirstInit: null == isFirstInit ? _self.isFirstInit : isFirstInit // ignore: cast_nullable_to_non_nullable
-as bool,
+as bool,imagePath: freezed == imagePath ? _self.imagePath : imagePath // ignore: cast_nullable_to_non_nullable
+as String?,selectedPhoto: freezed == selectedPhoto ? _self.selectedPhoto : selectedPhoto // ignore: cast_nullable_to_non_nullable
+as XFile?,
   ));
 }
 
@@ -989,10 +1103,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String pageTitle,  String title,  String comment,  Category? category,  Location? location,  List<Category> categories,  List<Location> locations,  bool isFirstInit)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String pageTitle,  String title,  String comment,  Category? category,  Location? location,  List<Category> categories,  List<Location> locations,  bool isFirstInit,  String? imagePath,  XFile? selectedPhoto)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ClothDetailState() when $default != null:
-return $default(_that.pageTitle,_that.title,_that.comment,_that.category,_that.location,_that.categories,_that.locations,_that.isFirstInit);case _:
+return $default(_that.pageTitle,_that.title,_that.comment,_that.category,_that.location,_that.categories,_that.locations,_that.isFirstInit,_that.imagePath,_that.selectedPhoto);case _:
   return orElse();
 
 }
@@ -1010,10 +1124,10 @@ return $default(_that.pageTitle,_that.title,_that.comment,_that.category,_that.l
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String pageTitle,  String title,  String comment,  Category? category,  Location? location,  List<Category> categories,  List<Location> locations,  bool isFirstInit)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String pageTitle,  String title,  String comment,  Category? category,  Location? location,  List<Category> categories,  List<Location> locations,  bool isFirstInit,  String? imagePath,  XFile? selectedPhoto)  $default,) {final _that = this;
 switch (_that) {
 case _ClothDetailState():
-return $default(_that.pageTitle,_that.title,_that.comment,_that.category,_that.location,_that.categories,_that.locations,_that.isFirstInit);case _:
+return $default(_that.pageTitle,_that.title,_that.comment,_that.category,_that.location,_that.categories,_that.locations,_that.isFirstInit,_that.imagePath,_that.selectedPhoto);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -1030,10 +1144,10 @@ return $default(_that.pageTitle,_that.title,_that.comment,_that.category,_that.l
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String pageTitle,  String title,  String comment,  Category? category,  Location? location,  List<Category> categories,  List<Location> locations,  bool isFirstInit)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String pageTitle,  String title,  String comment,  Category? category,  Location? location,  List<Category> categories,  List<Location> locations,  bool isFirstInit,  String? imagePath,  XFile? selectedPhoto)?  $default,) {final _that = this;
 switch (_that) {
 case _ClothDetailState() when $default != null:
-return $default(_that.pageTitle,_that.title,_that.comment,_that.category,_that.location,_that.categories,_that.locations,_that.isFirstInit);case _:
+return $default(_that.pageTitle,_that.title,_that.comment,_that.category,_that.location,_that.categories,_that.locations,_that.isFirstInit,_that.imagePath,_that.selectedPhoto);case _:
   return null;
 
 }
@@ -1044,8 +1158,8 @@ return $default(_that.pageTitle,_that.title,_that.comment,_that.category,_that.l
 /// @nodoc
 
 
-class _ClothDetailState implements ClothDetailState {
-  const _ClothDetailState({required this.pageTitle, required this.title, required this.comment, required this.category, required this.location, required  List<Category> categories, required  List<Location> locations, required this.isFirstInit}): _categories = categories,_locations = locations;
+class _ClothDetailState extends ClothDetailState {
+  const _ClothDetailState({required this.pageTitle, required this.title, required this.comment, required this.category, required this.location, required  List<Category> categories, required  List<Location> locations, required this.isFirstInit, this.imagePath, this.selectedPhoto}): _categories = categories,_locations = locations,super._();
   
 
 @override final  String pageTitle;
@@ -1068,6 +1182,8 @@ class _ClothDetailState implements ClothDetailState {
 }
 
 @override final  bool isFirstInit;
+@override final  String? imagePath;
+@override final  XFile? selectedPhoto;
 
 /// Create a copy of ClothDetailState
 /// with the given fields replaced by the non-null parameter values.
@@ -1079,18 +1195,18 @@ _$ClothDetailStateCopyWith<_ClothDetailState> get copyWith => __$ClothDetailStat
 
 @override
 bool operator ==(Object other) {
-    return identical(this, other) || (other.runtimeType == runtimeType&&other is _ClothDetailState&&(identical(other.pageTitle, pageTitle) || other.pageTitle == pageTitle)&&(identical(other.title, title) || other.title == title)&&(identical(other.comment, comment) || other.comment == comment)&&(identical(other.category, category) || other.category == category)&&(identical(other.location, location) || other.location == location)&&const DeepCollectionEquality().equals(other.categories, _categories)&&const DeepCollectionEquality().equals(other.locations, _locations)&&(identical(other.isFirstInit, isFirstInit) || other.isFirstInit == isFirstInit));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _ClothDetailState&&(identical(other.pageTitle, pageTitle) || other.pageTitle == pageTitle)&&(identical(other.title, title) || other.title == title)&&(identical(other.comment, comment) || other.comment == comment)&&(identical(other.category, category) || other.category == category)&&(identical(other.location, location) || other.location == location)&&const DeepCollectionEquality().equals(other.categories, _categories)&&const DeepCollectionEquality().equals(other.locations, _locations)&&(identical(other.isFirstInit, isFirstInit) || other.isFirstInit == isFirstInit)&&(identical(other.imagePath, imagePath) || other.imagePath == imagePath)&&(identical(other.selectedPhoto, selectedPhoto) || other.selectedPhoto == selectedPhoto));
 }
 
 
 @override
 int get hashCode {
-    return Object.hash(runtimeType,pageTitle,title,comment,category,location,const DeepCollectionEquality().hash(_categories),const DeepCollectionEquality().hash(_locations),isFirstInit);
+    return Object.hash(runtimeType,pageTitle,title,comment,category,location,const DeepCollectionEquality().hash(_categories),const DeepCollectionEquality().hash(_locations),isFirstInit,imagePath,selectedPhoto);
 }
 
 @override
 String toString() {
-    return 'ClothDetailState(pageTitle: $pageTitle, title: $title, comment: $comment, category: $category, location: $location, categories: $categories, locations: $locations, isFirstInit: $isFirstInit)';
+    return 'ClothDetailState(pageTitle: $pageTitle, title: $title, comment: $comment, category: $category, location: $location, categories: $categories, locations: $locations, isFirstInit: $isFirstInit, imagePath: $imagePath, selectedPhoto: $selectedPhoto)';
 }
 
 
@@ -1101,7 +1217,7 @@ abstract mixin class _$ClothDetailStateCopyWith<$Res> implements $ClothDetailSta
   factory _$ClothDetailStateCopyWith(_ClothDetailState value, $Res Function(_ClothDetailState) _then) = __$ClothDetailStateCopyWithImpl;
 @override @useResult
 $Res call({
- String pageTitle, String title, String comment, Category? category, Location? location, List<Category> categories, List<Location> locations, bool isFirstInit
+ String pageTitle, String title, String comment, Category? category, Location? location, List<Category> categories, List<Location> locations, bool isFirstInit, String? imagePath, XFile? selectedPhoto
 });
 
 
@@ -1118,7 +1234,7 @@ class __$ClothDetailStateCopyWithImpl<$Res>
 
 /// Create a copy of ClothDetailState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? pageTitle = null,Object? title = null,Object? comment = null,Object? category = freezed,Object? location = freezed,Object? categories = null,Object? locations = null,Object? isFirstInit = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? pageTitle = null,Object? title = null,Object? comment = null,Object? category = freezed,Object? location = freezed,Object? categories = null,Object? locations = null,Object? isFirstInit = null,Object? imagePath = freezed,Object? selectedPhoto = freezed,}) {
   return _then(_ClothDetailState(
 pageTitle: null == pageTitle ? _self.pageTitle : pageTitle // ignore: cast_nullable_to_non_nullable
 as String,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
@@ -1128,7 +1244,9 @@ as Category?,location: freezed == location ? _self.location : location // ignore
 as Location?,categories: null == categories ? _self._categories : categories // ignore: cast_nullable_to_non_nullable
 as List<Category>,locations: null == locations ? _self._locations : locations // ignore: cast_nullable_to_non_nullable
 as List<Location>,isFirstInit: null == isFirstInit ? _self.isFirstInit : isFirstInit // ignore: cast_nullable_to_non_nullable
-as bool,
+as bool,imagePath: freezed == imagePath ? _self.imagePath : imagePath // ignore: cast_nullable_to_non_nullable
+as String?,selectedPhoto: freezed == selectedPhoto ? _self.selectedPhoto : selectedPhoto // ignore: cast_nullable_to_non_nullable
+as XFile?,
   ));
 }
 

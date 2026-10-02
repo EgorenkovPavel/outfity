@@ -1,7 +1,7 @@
 class Cloth {
   final int id;
   final String title;
-  final String imagePath;
+  final String? imagePath;
   final int? categoryId;
   final int? locationId;
   final String comment;
