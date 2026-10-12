@@ -475,7 +475,7 @@ $Res call({
 });
 
 
-
+$CategoryCopyWith<$Res>? get category;
 
 }
 /// @nodoc
@@ -495,7 +495,19 @@ as Category?,
   ));
 }
 
+/// Create a copy of ClothDetailEvent
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$CategoryCopyWith<$Res>? get category {
+    if (_self.category == null) {
+    return null;
+  }
 
+  return $CategoryCopyWith<$Res>(_self.category!, (value) {
+    return _then(_self.copyWith(category: value));
+  });
+}
 }
 
 /// @nodoc
@@ -543,7 +555,7 @@ $Res call({
 });
 
 
-
+$LocationCopyWith<$Res>? get location;
 
 }
 /// @nodoc
@@ -563,7 +575,19 @@ as Location?,
   ));
 }
 
+/// Create a copy of ClothDetailEvent
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$LocationCopyWith<$Res>? get location {
+    if (_self.location == null) {
+    return null;
+  }
 
+  return $LocationCopyWith<$Res>(_self.location!, (value) {
+    return _then(_self.copyWith(location: value));
+  });
+}
 }
 
 /// @nodoc
@@ -993,7 +1017,7 @@ $Res call({
 });
 
 
-
+$CategoryCopyWith<$Res>? get category;$LocationCopyWith<$Res>? get location;
 
 }
 /// @nodoc
@@ -1023,7 +1047,31 @@ as String?,selectedPhoto: freezed == selectedPhoto ? _self.selectedPhoto : selec
 as XFile?,
   ));
 }
+/// Create a copy of ClothDetailState
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$CategoryCopyWith<$Res>? get category {
+    if (_self.category == null) {
+    return null;
+  }
 
+  return $CategoryCopyWith<$Res>(_self.category!, (value) {
+    return _then(_self.copyWith(category: value));
+  });
+}/// Create a copy of ClothDetailState
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$LocationCopyWith<$Res>? get location {
+    if (_self.location == null) {
+    return null;
+  }
+
+  return $LocationCopyWith<$Res>(_self.location!, (value) {
+    return _then(_self.copyWith(location: value));
+  });
+}
 }
 
 
@@ -1225,7 +1273,7 @@ $Res call({
 });
 
 
-
+@override $CategoryCopyWith<$Res>? get category;@override $LocationCopyWith<$Res>? get location;
 
 }
 /// @nodoc
@@ -1256,7 +1304,31 @@ as XFile?,
   ));
 }
 
+/// Create a copy of ClothDetailState
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$CategoryCopyWith<$Res>? get category {
+    if (_self.category == null) {
+    return null;
+  }
 
+  return $CategoryCopyWith<$Res>(_self.category!, (value) {
+    return _then(_self.copyWith(category: value));
+  });
+}/// Create a copy of ClothDetailState
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$LocationCopyWith<$Res>? get location {
+    if (_self.location == null) {
+    return null;
+  }
+
+  return $LocationCopyWith<$Res>(_self.location!, (value) {
+    return _then(_self.copyWith(location: value));
+  });
+}
 }
 
 // dart format on

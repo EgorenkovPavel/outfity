@@ -1,31 +1,32 @@
-class Cloth {
-  final int id;
-  final String title;
-  final String? imagePath;
-  final int? categoryId;
-  final int? locationId;
-  final String comment;
 
-  Cloth({
-    required this.title,
-    required this.id,
-    required this.imagePath,
-    required this.categoryId,
-    required this.locationId,
-    required this.comment,
-  });
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+part 'models.freezed.dart';
+
+@freezed
+abstract class Cloth with _$Cloth {
+  const factory Cloth({
+    required int id,
+    required String title,
+    String? imagePath,
+    int? categoryId,
+    int? locationId,
+    required String comment,
+  }) = _Cloth;
 }
 
-class Category {
-  final int id;
-  final String title;
-
-  Category({required this.id, required this.title});
+@freezed
+abstract class Category with _$Category {
+  const factory Category({
+    required int id,
+    required String title,
+  }) = _Category;
 }
 
-class Location {
-  final int id;
-  final String title;
-
-  Location({required this.id, required this.title});
+@freezed
+abstract class Location with _$Location {
+  const factory Location({
+    required int id,
+    required String title,
+  }) = _Location;
 }

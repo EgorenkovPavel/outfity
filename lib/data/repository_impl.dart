@@ -1,74 +1,107 @@
-import 'dart:async';
-
+import 'package:drift/drift.dart' show Value;
+import 'package:outfity/data/database/app_database.dart';
+import 'package:outfity/domain/models.dart';
 import 'package:outfity/domain/repository.dart';
 
-import '../domain/models.dart';
-
 class RepositoryImpl implements Repository {
-  final _clothController = StreamController<List<Cloth>>.broadcast();
-  final _categoryController = StreamController<List<Category>>.broadcast();
-  final _locationController = StreamController<List<Location>>.broadcast();
+  RepositoryImpl(this._db);
 
-  final _cloths = [
-    Cloth(
-      id: 1,
-      title: 'TShort',
-      categoryId: 1,
-      locationId: 2,
-      imagePath: null,
-      comment: '',
-    ),
-    Cloth(
-      id: 2,
-      title: 'TShort',
-      categoryId: null,
-      locationId: null,
-      imagePath: null,
-      comment: '',
-    ),
-    Cloth(
-      id: 3,
-      title: 'TShort',
-      categoryId: null,
-      locationId: null,
-      imagePath: null,
-      comment: '',
-    ),
-  ];
-
-  final _categories = [
-    Category(id: 1, title: 'Category 1'),
-    Category(id: 2, title: 'Category 2'),
-  ];
-
-  final _locations = [
-    Location(id: 1, title: 'Location 1'),
-    Location(id: 2, title: 'Location 2'),
-  ];
+  final AppDatabase _db;
 
   @override
-  Future<Category?> findCategoryById(int id) async {
-    return _categories.where((e) => e.id == id).firstOrNull;
+  Stream<List<Cloth>> watchClothes() {
+    return _db.select(_db.clothes).watch().map(
+          (rows) =>
+          rows
+              .map(
+                (row) =>
+                Cloth(
+                  id: row.id,
+                  title: row.title,
+                  imagePath: row.imagePath,
+                  categoryId: row.categoryId,
+                  locationId: row.locationId,
+                  comment: row.comment,
+                ),
+          )
+              .toList(),
+    );
+  }
+
+  @override
+  Stream<List<Category>> watchCategories() {
+    return _db.select(_db.categories).watch().map(
+          (rows) =>
+          rows
+              .map((row) => Category(id: row.id, title: row.title))
+              .toList(),
+    );
+  }
+
+  @override
+  Stream<List<Location>> watchLocations() {
+    return _db.select(_db.locations).watch().map(
+          (rows) =>
+          rows
+              .map((row) => Location(id: row.id, title: row.title))
+              .toList(),
+    );
   }
 
   @override
   Future<Cloth?> findClothById(int id) async {
-    return _cloths.where((e) => e.id == id).firstOrNull;
+    final row = await (_db.select(_db.clothes)
+      ..where((table) => table.id.equals(id)))
+        .getSingleOrNull();
+
+    if (row == null) return null;
+
+    return Cloth(
+      id: row.id,
+      title: row.title,
+      imagePath: row.imagePath,
+      categoryId: row.categoryId,
+      locationId: row.locationId,
+      comment: row.comment,
+    );
+  }
+
+  @override
+  Future<Category?> findCategoryById(int id) async {
+    final row = await (_db.select(_db.categories)
+      ..where((table) => table.id.equals(id)))
+        .getSingleOrNull();
+
+    if (row == null) return null;
+    return Category(id: row.id, title: row.title);
   }
 
   @override
   Future<Location?> findLocationById(int id) async {
-    return _locations.where((e) => e.id == id).firstOrNull;
+    final row = await (_db.select(_db.locations)
+      ..where((table) => table.id.equals(id)))
+        .getSingleOrNull();
+
+    if (row == null) return null;
+    return Location(id: row.id, title: row.title);
   }
 
   @override
   Future<Category> addCategory({required String title}) async {
-    final category = Category(id: 47, title: title);
-    _categories.add(category);
+    final id = await _db.into(_db.categories).insert(
+      CategoriesCompanion.insert(title: title),
+    );
 
-    _categoryController.add(List.unmodifiable(_categories));
+    return Category(id: id, title: title);
+  }
 
-    return category;
+  @override
+  Future<Location> addLocation({required String title}) async {
+    final id = await _db.into(_db.locations).insert(
+      LocationsCompanion.insert(title: title),
+    );
+
+    return Location(id: id, title: title);
   }
 
   @override
@@ -79,51 +112,24 @@ class RepositoryImpl implements Repository {
     required int? locationId,
     required String comment,
   }) async {
-    final cloth = Cloth(
-      id: 47,
+    final id = await _db.into(_db.clothes).insert(
+      ClothesCompanion.insert(
+        title: title,
+        imagePath: Value(imagePath),
+        categoryId: Value(categoryId),
+        locationId: Value(locationId),
+        comment: comment,
+      ),
+    );
+
+    return Cloth(
+      id: id,
       title: title,
       imagePath: imagePath,
       categoryId: categoryId,
       locationId: locationId,
       comment: comment,
     );
-
-    _cloths.add(cloth);
-
-    _clothController.add(List.unmodifiable(_cloths));
-
-    return cloth;
-  }
-
-  @override
-  Future<Location> addLocation({required String title}) async {
-    final location = Location(id: 47, title: title);
-    _locations.add(location);
-
-    _locationController.add(List.unmodifiable(_locations));
-
-    return location;
-  }
-
-  @override
-  Stream<List<Category>> watchCategories() async* {
-    yield List.unmodifiable(_categories);
-
-    yield* _categoryController.stream;
-  }
-
-  @override
-  Stream<List<Cloth>> watchClothes() async* {
-    yield List.unmodifiable(_cloths);
-
-    yield* _clothController.stream;
-  }
-
-  @override
-  Stream<List<Location>> watchLocations() async* {
-    yield List.unmodifiable(_locations);
-
-    yield* _locationController.stream;
   }
 
   @override
@@ -135,23 +141,29 @@ class RepositoryImpl implements Repository {
     required int? locationId,
     required String comment,
   }) async {
-    final index = _cloths.indexWhere((item) => item.id == id);
+    final updated = await (_db.update(_db.clothes)
+      ..where((table) => table.id.equals(id)))
+        .write(
+      ClothesCompanion(
+        title: Value(title),
+        imagePath: Value(imagePath),
+        categoryId: Value(categoryId),
+        locationId: Value(locationId),
+        comment: Value(comment),
+      ),
+    );
 
-    if (index == -1) {
+    if (updated == 0) {
       throw StateError('Cloth $id not found');
     }
 
-    final cloth = Cloth(
-        title: title,
-        id: id,
-        imagePath: imagePath,
-        categoryId: categoryId,
-        locationId: locationId,
-        comment: comment);
-
-    _cloths[index] = cloth;
-    _clothController.add(List.unmodifiable(_cloths));
-
-    return cloth;
+    return Cloth(
+      id: id,
+      title: title,
+      imagePath: imagePath,
+      categoryId: categoryId,
+      locationId: locationId,
+      comment: comment,
+    );
   }
 }
