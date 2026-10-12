@@ -14,7 +14,7 @@ final appRouter = GoRouter(
       path: '/clothes',
       builder: (context, state) {
         return BlocProvider(
-          create: (_) => getIt<HomeBloc>()..add(const HomeEvent.fetch()),
+          create: (_) => getIt<HomeBloc>(),
           child: const HomePage(),
         );
       },
