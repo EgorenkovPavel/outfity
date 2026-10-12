@@ -50,6 +50,7 @@ abstract class ClothDetailState with _$ClothDetailState {
   const ClothDetailState._();
 
   const factory ClothDetailState({
+    required int? id,
     required String pageTitle,
     required String title,
     required String comment,
@@ -58,6 +59,7 @@ abstract class ClothDetailState with _$ClothDetailState {
     required List<Category> categories,
     required List<Location> locations,
     required bool isFirstInit,
+    required bool isSaved,
     String? imagePath, // путь к уже сохраненному фото
     XFile? selectedPhoto, // только что снятое фото
   }) = _ClothDetailState;
@@ -81,6 +83,7 @@ class ClothDetailBloc extends Bloc<ClothDetailEvent, ClothDetailState> {
   ClothDetailBloc({required this._repository, required this._photoService})
       : super(
     ClothDetailState(
+      id: null,
       pageTitle: '',
       title: '',
       comment: '',
@@ -89,6 +92,7 @@ class ClothDetailBloc extends Bloc<ClothDetailEvent, ClothDetailState> {
       categories: [],
       locations: [],
       isFirstInit: false,
+      isSaved: false,
     ),
   ) {
     on<ClothDetailEvent>(
@@ -136,6 +140,7 @@ class ClothDetailBloc extends Bloc<ClothDetailEvent, ClothDetailState> {
 
       emit(
         state.copyWith(
+          id: clothId,
           pageTitle: 'Edit',
           title: cloth?.title ?? '',
           comment: cloth?.comment ?? '',
@@ -167,13 +172,13 @@ class ClothDetailBloc extends Bloc<ClothDetailEvent, ClothDetailState> {
 
   Future<void> _onSaveCategory(_SaveCategory event,
       Emitter<ClothDetailState> emit) async {
-    final category = await _repository.saveCategory(title: event.title);
+    final category = await _repository.addCategory(title: event.title);
     emit(state.copyWith(category: category));
   }
 
   Future<void> _onSaveLocation(_SaveLocation event,
       Emitter<ClothDetailState> emit) async {
-    final location = await _repository.saveLocation(title: event.title);
+    final location = await _repository.addLocation(title: event.title);
     emit(state.copyWith(location: location));
   }
 
@@ -205,13 +210,66 @@ class ClothDetailBloc extends Bloc<ClothDetailEvent, ClothDetailState> {
     emit(state.copyWith(selectedPhoto: event.photo));
   }
 
-  void _onSaveCloth(_SaveCloth event, Emitter<ClothDetailState> emit) {
+  Future<void> _onSaveCloth(_SaveCloth event,
+      Emitter<ClothDetailState> emit) async {
+    final title = state.title.trim();
 
-    // TODO
+    if (title.isEmpty) {
+      return;
+    }
 
+    try {
+      final cloth =
+      state.id == null ?
+      await _repository.addCloth(
+        title: title,
+        imagePath: state.imagePath,
+        categoryId: state.category?.id,
+        locationId: state.location?.id,
+        comment: state.comment.trim(),
+      ) :
+      await _repository.updateCloth(id: state.id!,
+          title: title,
+          imagePath: state.imagePath,
+          categoryId: state.category?.id,
+          locationId: state.location?.id,
+          comment: state.comment.trim());
 
-    // if (state.selectedPhoto != null){
-    //   _photoService.save(state.selectedPhoto, clothId: clothId)
-    // }
+      final photo = state.selectedPhoto;
+
+      if (photo == null) {
+        emit(
+          state.copyWith(
+            isSaved: true,
+          ),
+        );
+        return;
+      }
+
+      final imagePath = await _photoService.save(
+        photo,
+        clothId: cloth.id,
+      );
+
+      await _repository.updateCloth(
+        id: cloth.id,
+        title: cloth.title,
+        imagePath: imagePath,
+        categoryId: cloth.categoryId,
+        locationId: cloth.locationId,
+        comment: cloth.comment,
+      );
+
+      emit(
+        state.copyWith(
+          imagePath: imagePath,
+          selectedPhoto: null,
+          isSaved: true,
+        ),
+      );
+    } catch (error, stackTrace) {
+      print(error.toString());
+      addError(error, stackTrace);
+    }
   }
 }

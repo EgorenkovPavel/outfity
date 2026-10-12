@@ -953,7 +953,7 @@ as XFile,
 /// @nodoc
 mixin _$ClothDetailState {
 
- String get pageTitle; String get title; String get comment; Category? get category; Location? get location; List<Category> get categories; List<Location> get locations; bool get isFirstInit; String? get imagePath; XFile? get selectedPhoto;
+ int? get id; String get pageTitle; String get title; String get comment; Category? get category; Location? get location; List<Category> get categories; List<Location> get locations; bool get isFirstInit; bool get isSaved; String? get imagePath; XFile? get selectedPhoto;
 /// Create a copy of ClothDetailState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -965,20 +965,20 @@ $ClothDetailStateCopyWith<ClothDetailState> get copyWith => _$ClothDetailStateCo
 @override
 bool operator ==(Object other) {
   final _this = this as ClothDetailState;
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ClothDetailState&&(identical(other.pageTitle, _this.pageTitle) || other.pageTitle == _this.pageTitle)&&(identical(other.title, _this.title) || other.title == _this.title)&&(identical(other.comment, _this.comment) || other.comment == _this.comment)&&(identical(other.category, _this.category) || other.category == _this.category)&&(identical(other.location, _this.location) || other.location == _this.location)&&const DeepCollectionEquality().equals(other.categories, _this.categories)&&const DeepCollectionEquality().equals(other.locations, _this.locations)&&(identical(other.isFirstInit, _this.isFirstInit) || other.isFirstInit == _this.isFirstInit)&&(identical(other.imagePath, _this.imagePath) || other.imagePath == _this.imagePath)&&(identical(other.selectedPhoto, _this.selectedPhoto) || other.selectedPhoto == _this.selectedPhoto));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ClothDetailState&&(identical(other.id, _this.id) || other.id == _this.id)&&(identical(other.pageTitle, _this.pageTitle) || other.pageTitle == _this.pageTitle)&&(identical(other.title, _this.title) || other.title == _this.title)&&(identical(other.comment, _this.comment) || other.comment == _this.comment)&&(identical(other.category, _this.category) || other.category == _this.category)&&(identical(other.location, _this.location) || other.location == _this.location)&&const DeepCollectionEquality().equals(other.categories, _this.categories)&&const DeepCollectionEquality().equals(other.locations, _this.locations)&&(identical(other.isFirstInit, _this.isFirstInit) || other.isFirstInit == _this.isFirstInit)&&(identical(other.isSaved, _this.isSaved) || other.isSaved == _this.isSaved)&&(identical(other.imagePath, _this.imagePath) || other.imagePath == _this.imagePath)&&(identical(other.selectedPhoto, _this.selectedPhoto) || other.selectedPhoto == _this.selectedPhoto));
 }
 
 
 @override
 int get hashCode {
   final _this = this as ClothDetailState;
-  return Object.hash(runtimeType,_this.pageTitle,_this.title,_this.comment,_this.category,_this.location,const DeepCollectionEquality().hash(_this.categories),const DeepCollectionEquality().hash(_this.locations),_this.isFirstInit,_this.imagePath,_this.selectedPhoto);
+  return Object.hash(runtimeType,_this.id,_this.pageTitle,_this.title,_this.comment,_this.category,_this.location,const DeepCollectionEquality().hash(_this.categories),const DeepCollectionEquality().hash(_this.locations),_this.isFirstInit,_this.isSaved,_this.imagePath,_this.selectedPhoto);
 }
 
 @override
 String toString() {
   final _this = this as ClothDetailState;
-  return 'ClothDetailState(pageTitle: ${_this.pageTitle}, title: ${_this.title}, comment: ${_this.comment}, category: ${_this.category}, location: ${_this.location}, categories: ${_this.categories}, locations: ${_this.locations}, isFirstInit: ${_this.isFirstInit}, imagePath: ${_this.imagePath}, selectedPhoto: ${_this.selectedPhoto})';
+  return 'ClothDetailState(id: ${_this.id}, pageTitle: ${_this.pageTitle}, title: ${_this.title}, comment: ${_this.comment}, category: ${_this.category}, location: ${_this.location}, categories: ${_this.categories}, locations: ${_this.locations}, isFirstInit: ${_this.isFirstInit}, isSaved: ${_this.isSaved}, imagePath: ${_this.imagePath}, selectedPhoto: ${_this.selectedPhoto})';
 }
 
 
@@ -989,7 +989,7 @@ abstract mixin class $ClothDetailStateCopyWith<$Res>  {
   factory $ClothDetailStateCopyWith(ClothDetailState value, $Res Function(ClothDetailState) _then) = _$ClothDetailStateCopyWithImpl;
 @useResult
 $Res call({
- String pageTitle, String title, String comment, Category? category, Location? location, List<Category> categories, List<Location> locations, bool isFirstInit, String? imagePath, XFile? selectedPhoto
+ int? id, String pageTitle, String title, String comment, Category? category, Location? location, List<Category> categories, List<Location> locations, bool isFirstInit, bool isSaved, String? imagePath, XFile? selectedPhoto
 });
 
 
@@ -1006,9 +1006,10 @@ class _$ClothDetailStateCopyWithImpl<$Res>
 
 /// Create a copy of ClothDetailState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? pageTitle = null,Object? title = null,Object? comment = null,Object? category = freezed,Object? location = freezed,Object? categories = null,Object? locations = null,Object? isFirstInit = null,Object? imagePath = freezed,Object? selectedPhoto = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? pageTitle = null,Object? title = null,Object? comment = null,Object? category = freezed,Object? location = freezed,Object? categories = null,Object? locations = null,Object? isFirstInit = null,Object? isSaved = null,Object? imagePath = freezed,Object? selectedPhoto = freezed,}) {
   return _then(ClothDetailState(
-pageTitle: null == pageTitle ? _self.pageTitle : pageTitle // ignore: cast_nullable_to_non_nullable
+id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as int?,pageTitle: null == pageTitle ? _self.pageTitle : pageTitle // ignore: cast_nullable_to_non_nullable
 as String,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
 as String,comment: null == comment ? _self.comment : comment // ignore: cast_nullable_to_non_nullable
 as String,category: freezed == category ? _self.category : category // ignore: cast_nullable_to_non_nullable
@@ -1016,6 +1017,7 @@ as Category?,location: freezed == location ? _self.location : location // ignore
 as Location?,categories: null == categories ? _self.categories : categories // ignore: cast_nullable_to_non_nullable
 as List<Category>,locations: null == locations ? _self.locations : locations // ignore: cast_nullable_to_non_nullable
 as List<Location>,isFirstInit: null == isFirstInit ? _self.isFirstInit : isFirstInit // ignore: cast_nullable_to_non_nullable
+as bool,isSaved: null == isSaved ? _self.isSaved : isSaved // ignore: cast_nullable_to_non_nullable
 as bool,imagePath: freezed == imagePath ? _self.imagePath : imagePath // ignore: cast_nullable_to_non_nullable
 as String?,selectedPhoto: freezed == selectedPhoto ? _self.selectedPhoto : selectedPhoto // ignore: cast_nullable_to_non_nullable
 as XFile?,
@@ -1103,10 +1105,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String pageTitle,  String title,  String comment,  Category? category,  Location? location,  List<Category> categories,  List<Location> locations,  bool isFirstInit,  String? imagePath,  XFile? selectedPhoto)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int? id,  String pageTitle,  String title,  String comment,  Category? category,  Location? location,  List<Category> categories,  List<Location> locations,  bool isFirstInit,  bool isSaved,  String? imagePath,  XFile? selectedPhoto)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ClothDetailState() when $default != null:
-return $default(_that.pageTitle,_that.title,_that.comment,_that.category,_that.location,_that.categories,_that.locations,_that.isFirstInit,_that.imagePath,_that.selectedPhoto);case _:
+return $default(_that.id,_that.pageTitle,_that.title,_that.comment,_that.category,_that.location,_that.categories,_that.locations,_that.isFirstInit,_that.isSaved,_that.imagePath,_that.selectedPhoto);case _:
   return orElse();
 
 }
@@ -1124,10 +1126,10 @@ return $default(_that.pageTitle,_that.title,_that.comment,_that.category,_that.l
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String pageTitle,  String title,  String comment,  Category? category,  Location? location,  List<Category> categories,  List<Location> locations,  bool isFirstInit,  String? imagePath,  XFile? selectedPhoto)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int? id,  String pageTitle,  String title,  String comment,  Category? category,  Location? location,  List<Category> categories,  List<Location> locations,  bool isFirstInit,  bool isSaved,  String? imagePath,  XFile? selectedPhoto)  $default,) {final _that = this;
 switch (_that) {
 case _ClothDetailState():
-return $default(_that.pageTitle,_that.title,_that.comment,_that.category,_that.location,_that.categories,_that.locations,_that.isFirstInit,_that.imagePath,_that.selectedPhoto);case _:
+return $default(_that.id,_that.pageTitle,_that.title,_that.comment,_that.category,_that.location,_that.categories,_that.locations,_that.isFirstInit,_that.isSaved,_that.imagePath,_that.selectedPhoto);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -1144,10 +1146,10 @@ return $default(_that.pageTitle,_that.title,_that.comment,_that.category,_that.l
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String pageTitle,  String title,  String comment,  Category? category,  Location? location,  List<Category> categories,  List<Location> locations,  bool isFirstInit,  String? imagePath,  XFile? selectedPhoto)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int? id,  String pageTitle,  String title,  String comment,  Category? category,  Location? location,  List<Category> categories,  List<Location> locations,  bool isFirstInit,  bool isSaved,  String? imagePath,  XFile? selectedPhoto)?  $default,) {final _that = this;
 switch (_that) {
 case _ClothDetailState() when $default != null:
-return $default(_that.pageTitle,_that.title,_that.comment,_that.category,_that.location,_that.categories,_that.locations,_that.isFirstInit,_that.imagePath,_that.selectedPhoto);case _:
+return $default(_that.id,_that.pageTitle,_that.title,_that.comment,_that.category,_that.location,_that.categories,_that.locations,_that.isFirstInit,_that.isSaved,_that.imagePath,_that.selectedPhoto);case _:
   return null;
 
 }
@@ -1159,9 +1161,10 @@ return $default(_that.pageTitle,_that.title,_that.comment,_that.category,_that.l
 
 
 class _ClothDetailState extends ClothDetailState {
-  const _ClothDetailState({required this.pageTitle, required this.title, required this.comment, required this.category, required this.location, required  List<Category> categories, required  List<Location> locations, required this.isFirstInit, this.imagePath, this.selectedPhoto}): _categories = categories,_locations = locations,super._();
+  const _ClothDetailState({required this.id, required this.pageTitle, required this.title, required this.comment, required this.category, required this.location, required  List<Category> categories, required  List<Location> locations, required this.isFirstInit, required this.isSaved, this.imagePath, this.selectedPhoto}): _categories = categories,_locations = locations,super._();
   
 
+@override final  int? id;
 @override final  String pageTitle;
 @override final  String title;
 @override final  String comment;
@@ -1182,6 +1185,7 @@ class _ClothDetailState extends ClothDetailState {
 }
 
 @override final  bool isFirstInit;
+@override final  bool isSaved;
 @override final  String? imagePath;
 @override final  XFile? selectedPhoto;
 
@@ -1195,18 +1199,18 @@ _$ClothDetailStateCopyWith<_ClothDetailState> get copyWith => __$ClothDetailStat
 
 @override
 bool operator ==(Object other) {
-    return identical(this, other) || (other.runtimeType == runtimeType&&other is _ClothDetailState&&(identical(other.pageTitle, pageTitle) || other.pageTitle == pageTitle)&&(identical(other.title, title) || other.title == title)&&(identical(other.comment, comment) || other.comment == comment)&&(identical(other.category, category) || other.category == category)&&(identical(other.location, location) || other.location == location)&&const DeepCollectionEquality().equals(other.categories, _categories)&&const DeepCollectionEquality().equals(other.locations, _locations)&&(identical(other.isFirstInit, isFirstInit) || other.isFirstInit == isFirstInit)&&(identical(other.imagePath, imagePath) || other.imagePath == imagePath)&&(identical(other.selectedPhoto, selectedPhoto) || other.selectedPhoto == selectedPhoto));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _ClothDetailState&&(identical(other.id, id) || other.id == id)&&(identical(other.pageTitle, pageTitle) || other.pageTitle == pageTitle)&&(identical(other.title, title) || other.title == title)&&(identical(other.comment, comment) || other.comment == comment)&&(identical(other.category, category) || other.category == category)&&(identical(other.location, location) || other.location == location)&&const DeepCollectionEquality().equals(other.categories, _categories)&&const DeepCollectionEquality().equals(other.locations, _locations)&&(identical(other.isFirstInit, isFirstInit) || other.isFirstInit == isFirstInit)&&(identical(other.isSaved, isSaved) || other.isSaved == isSaved)&&(identical(other.imagePath, imagePath) || other.imagePath == imagePath)&&(identical(other.selectedPhoto, selectedPhoto) || other.selectedPhoto == selectedPhoto));
 }
 
 
 @override
 int get hashCode {
-    return Object.hash(runtimeType,pageTitle,title,comment,category,location,const DeepCollectionEquality().hash(_categories),const DeepCollectionEquality().hash(_locations),isFirstInit,imagePath,selectedPhoto);
+    return Object.hash(runtimeType,id,pageTitle,title,comment,category,location,const DeepCollectionEquality().hash(_categories),const DeepCollectionEquality().hash(_locations),isFirstInit,isSaved,imagePath,selectedPhoto);
 }
 
 @override
 String toString() {
-    return 'ClothDetailState(pageTitle: $pageTitle, title: $title, comment: $comment, category: $category, location: $location, categories: $categories, locations: $locations, isFirstInit: $isFirstInit, imagePath: $imagePath, selectedPhoto: $selectedPhoto)';
+    return 'ClothDetailState(id: $id, pageTitle: $pageTitle, title: $title, comment: $comment, category: $category, location: $location, categories: $categories, locations: $locations, isFirstInit: $isFirstInit, isSaved: $isSaved, imagePath: $imagePath, selectedPhoto: $selectedPhoto)';
 }
 
 
@@ -1217,7 +1221,7 @@ abstract mixin class _$ClothDetailStateCopyWith<$Res> implements $ClothDetailSta
   factory _$ClothDetailStateCopyWith(_ClothDetailState value, $Res Function(_ClothDetailState) _then) = __$ClothDetailStateCopyWithImpl;
 @override @useResult
 $Res call({
- String pageTitle, String title, String comment, Category? category, Location? location, List<Category> categories, List<Location> locations, bool isFirstInit, String? imagePath, XFile? selectedPhoto
+ int? id, String pageTitle, String title, String comment, Category? category, Location? location, List<Category> categories, List<Location> locations, bool isFirstInit, bool isSaved, String? imagePath, XFile? selectedPhoto
 });
 
 
@@ -1234,9 +1238,10 @@ class __$ClothDetailStateCopyWithImpl<$Res>
 
 /// Create a copy of ClothDetailState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? pageTitle = null,Object? title = null,Object? comment = null,Object? category = freezed,Object? location = freezed,Object? categories = null,Object? locations = null,Object? isFirstInit = null,Object? imagePath = freezed,Object? selectedPhoto = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = freezed,Object? pageTitle = null,Object? title = null,Object? comment = null,Object? category = freezed,Object? location = freezed,Object? categories = null,Object? locations = null,Object? isFirstInit = null,Object? isSaved = null,Object? imagePath = freezed,Object? selectedPhoto = freezed,}) {
   return _then(_ClothDetailState(
-pageTitle: null == pageTitle ? _self.pageTitle : pageTitle // ignore: cast_nullable_to_non_nullable
+id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as int?,pageTitle: null == pageTitle ? _self.pageTitle : pageTitle // ignore: cast_nullable_to_non_nullable
 as String,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
 as String,comment: null == comment ? _self.comment : comment // ignore: cast_nullable_to_non_nullable
 as String,category: freezed == category ? _self.category : category // ignore: cast_nullable_to_non_nullable
@@ -1244,6 +1249,7 @@ as Category?,location: freezed == location ? _self.location : location // ignore
 as Location?,categories: null == categories ? _self._categories : categories // ignore: cast_nullable_to_non_nullable
 as List<Category>,locations: null == locations ? _self._locations : locations // ignore: cast_nullable_to_non_nullable
 as List<Location>,isFirstInit: null == isFirstInit ? _self.isFirstInit : isFirstInit // ignore: cast_nullable_to_non_nullable
+as bool,isSaved: null == isSaved ? _self.isSaved : isSaved // ignore: cast_nullable_to_non_nullable
 as bool,imagePath: freezed == imagePath ? _self.imagePath : imagePath // ignore: cast_nullable_to_non_nullable
 as String?,selectedPhoto: freezed == selectedPhoto ? _self.selectedPhoto : selectedPhoto // ignore: cast_nullable_to_non_nullable
 as XFile?,

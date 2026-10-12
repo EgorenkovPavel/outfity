@@ -1,6 +1,7 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
+import 'package:outfity/core/photo_service.dart';
+
+import '../../core/injection.dart';
 
 class ImagePlaceholder extends StatelessWidget {
   final void Function()? onTap;
@@ -36,14 +37,24 @@ class ImagePlaceholder extends StatelessWidget {
               ),
             ),
             if (imagePath != null)
-              ClipRRect(
-                borderRadius: BorderRadius.circular(16),
-                child: Image.file(
-                  File(imagePath!),
-                  width: double.infinity,
-                  fit: BoxFit.cover,
-                ),
-              ),
+
+              FutureBuilder(future: getIt<PhotoService>().getFile(imagePath),
+                  builder: (context, snapshot) {
+                    final file = snapshot.data;
+
+                    if (file == null) {
+                      return SizedBox();
+                    } else {
+                      return ClipRRect(
+                        borderRadius: BorderRadius.circular(16),
+                        child: Image.file(
+                          file,
+                          width: double.infinity,
+                          fit: BoxFit.cover,
+                        ),
+                      );
+                    }
+                  }),
           ],
         ),
       ),

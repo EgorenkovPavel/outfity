@@ -24,7 +24,7 @@ class ClothItem extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Column(
               children: [
-                Expanded(child: const ImagePlaceholder()),
+                Expanded(child: ImagePlaceholder(imagePath: cloth.imagePath,)),
                 SizedBox(height: 8),
                 Text(
                   cloth.title,

@@ -13,13 +13,22 @@ abstract interface class Repository {
 
   Future<Location?> findLocationById(int id);
 
-  Future<Category> saveCategory({required String title});
+  Future<Category> addCategory({required String title});
 
-  Future<Location> saveLocation({required String title});
+  Future<Location> addLocation({required String title});
 
-  Future<Cloth> saveCloth({
+  Future<Cloth> addCloth({
     required String title,
-    required String imagePath,
+    required String? imagePath,
+    required int? categoryId,
+    required int? locationId,
+    required String comment,
+  });
+
+  Future<Cloth> updateCloth({
+    required int id,
+    required String title,
+    required String? imagePath,
     required int? categoryId,
     required int? locationId,
     required String comment,

@@ -62,7 +62,7 @@ class RepositoryImpl implements Repository {
   }
 
   @override
-  Future<Category> saveCategory({required String title}) async {
+  Future<Category> addCategory({required String title}) async {
     final category = Category(id: 47, title: title);
     _categories.add(category);
 
@@ -72,9 +72,9 @@ class RepositoryImpl implements Repository {
   }
 
   @override
-  Future<Cloth> saveCloth({
+  Future<Cloth> addCloth({
     required String title,
-    required String imagePath,
+    required String? imagePath,
     required int? categoryId,
     required int? locationId,
     required String comment,
@@ -96,7 +96,7 @@ class RepositoryImpl implements Repository {
   }
 
   @override
-  Future<Location> saveLocation({required String title}) async {
+  Future<Location> addLocation({required String title}) async {
     final location = Location(id: 47, title: title);
     _locations.add(location);
 
@@ -124,5 +124,34 @@ class RepositoryImpl implements Repository {
     yield List.unmodifiable(_locations);
 
     yield* _locationController.stream;
+  }
+
+  @override
+  Future<Cloth> updateCloth({
+    required int id,
+    required String title,
+    required String? imagePath,
+    required int? categoryId,
+    required int? locationId,
+    required String comment,
+  }) async {
+    final index = _cloths.indexWhere((item) => item.id == id);
+
+    if (index == -1) {
+      throw StateError('Cloth $id not found');
+    }
+
+    final cloth = Cloth(
+        title: title,
+        id: id,
+        imagePath: imagePath,
+        categoryId: categoryId,
+        locationId: locationId,
+        comment: comment);
+
+    _cloths[index] = cloth;
+    _clothController.add(List.unmodifiable(_cloths));
+
+    return cloth;
   }
 }
