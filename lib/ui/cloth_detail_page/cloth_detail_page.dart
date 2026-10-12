@@ -157,8 +157,37 @@ class _ClothDetailPageState extends State<ClothDetailPage> {
     context.read<ClothDetailBloc>().add(ClothDetailEvent.saveCloth());
   }
 
-  void onDelete() {
-    // TODO
+  Future<void> onDelete() async {
+    final bloc = context.read<ClothDetailBloc>();
+    final state = bloc.state;
+
+    // На экране создания ещё нет сохранённой вещи.
+    if (state.id == null) return;
+
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        title: const Text('Удалить вещь?'), // TODO
+        content: const Text(
+          'Вещь будет удалена из гардероба. ' // TODO
+              'Это действие нельзя отменить.',
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(dialogContext, false),
+            child: const Text('Отмена'),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.pop(dialogContext, true),
+            child: const Text('Удалить'),
+          ),
+        ],
+      ),
+    );
+
+    if (!mounted || confirmed != true) return;
+
+    bloc.add(const ClothDetailEvent.deleteCloth());
   }
 
   @override
@@ -185,12 +214,17 @@ class _ClothDetailPageState extends State<ClothDetailPage> {
             .state
             .pageTitle),
         actions: [
-          IconButton(
+          if (context.select(
+                (ClothDetailBloc bloc) => bloc.state.id != null,
+          ))
+            IconButton(
               onPressed: onDelete,
               icon: Icon(Icons.delete_outline,
-                color: Theme
-                    .of(context)
-                    .primaryColor,)),
+              color: Theme
+                  .of(context)
+                  .primaryColor,),
+              tooltip: 'Удалить вещь', // TODO
+            ),
         ],
       ),
       body: Padding(

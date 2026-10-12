@@ -56,7 +56,7 @@ extension ClothDetailEventPatterns on ClothDetailEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Fetch value)?  fetch,TResult Function( _TitleChanged value)?  titleChanged,TResult Function( _CommentChanged value)?  commentChanged,TResult Function( _ChangeCategory value)?  changeCategory,TResult Function( _ChangeLocation value)?  changeLocation,TResult Function( _SaveCategory value)?  saveCategory,TResult Function( _SaveLocation value)?  saveLocation,TResult Function( _SaveCloth value)?  saveCloth,TResult Function( _ChangeCategories value)?  changeCategories,TResult Function( _ChangeLocations value)?  changeLocations,TResult Function( _TakePhoto value)?  takePhoto,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Fetch value)?  fetch,TResult Function( _TitleChanged value)?  titleChanged,TResult Function( _CommentChanged value)?  commentChanged,TResult Function( _ChangeCategory value)?  changeCategory,TResult Function( _ChangeLocation value)?  changeLocation,TResult Function( _SaveCategory value)?  saveCategory,TResult Function( _SaveLocation value)?  saveLocation,TResult Function( _SaveCloth value)?  saveCloth,TResult Function( _DeleteCloth value)?  deleteCloth,TResult Function( _ChangeCategories value)?  changeCategories,TResult Function( _ChangeLocations value)?  changeLocations,TResult Function( _TakePhoto value)?  takePhoto,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _Fetch() when fetch != null:
@@ -67,7 +67,8 @@ return changeCategory(_that);case _ChangeLocation() when changeLocation != null:
 return changeLocation(_that);case _SaveCategory() when saveCategory != null:
 return saveCategory(_that);case _SaveLocation() when saveLocation != null:
 return saveLocation(_that);case _SaveCloth() when saveCloth != null:
-return saveCloth(_that);case _ChangeCategories() when changeCategories != null:
+return saveCloth(_that);case _DeleteCloth() when deleteCloth != null:
+return deleteCloth(_that);case _ChangeCategories() when changeCategories != null:
 return changeCategories(_that);case _ChangeLocations() when changeLocations != null:
 return changeLocations(_that);case _TakePhoto() when takePhoto != null:
 return takePhoto(_that);case _:
@@ -88,7 +89,7 @@ return takePhoto(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Fetch value)  fetch,required TResult Function( _TitleChanged value)  titleChanged,required TResult Function( _CommentChanged value)  commentChanged,required TResult Function( _ChangeCategory value)  changeCategory,required TResult Function( _ChangeLocation value)  changeLocation,required TResult Function( _SaveCategory value)  saveCategory,required TResult Function( _SaveLocation value)  saveLocation,required TResult Function( _SaveCloth value)  saveCloth,required TResult Function( _ChangeCategories value)  changeCategories,required TResult Function( _ChangeLocations value)  changeLocations,required TResult Function( _TakePhoto value)  takePhoto,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Fetch value)  fetch,required TResult Function( _TitleChanged value)  titleChanged,required TResult Function( _CommentChanged value)  commentChanged,required TResult Function( _ChangeCategory value)  changeCategory,required TResult Function( _ChangeLocation value)  changeLocation,required TResult Function( _SaveCategory value)  saveCategory,required TResult Function( _SaveLocation value)  saveLocation,required TResult Function( _SaveCloth value)  saveCloth,required TResult Function( _DeleteCloth value)  deleteCloth,required TResult Function( _ChangeCategories value)  changeCategories,required TResult Function( _ChangeLocations value)  changeLocations,required TResult Function( _TakePhoto value)  takePhoto,}){
 final _that = this;
 switch (_that) {
 case _Fetch():
@@ -99,7 +100,8 @@ return changeCategory(_that);case _ChangeLocation():
 return changeLocation(_that);case _SaveCategory():
 return saveCategory(_that);case _SaveLocation():
 return saveLocation(_that);case _SaveCloth():
-return saveCloth(_that);case _ChangeCategories():
+return saveCloth(_that);case _DeleteCloth():
+return deleteCloth(_that);case _ChangeCategories():
 return changeCategories(_that);case _ChangeLocations():
 return changeLocations(_that);case _TakePhoto():
 return takePhoto(_that);}
@@ -116,7 +118,7 @@ return takePhoto(_that);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Fetch value)?  fetch,TResult? Function( _TitleChanged value)?  titleChanged,TResult? Function( _CommentChanged value)?  commentChanged,TResult? Function( _ChangeCategory value)?  changeCategory,TResult? Function( _ChangeLocation value)?  changeLocation,TResult? Function( _SaveCategory value)?  saveCategory,TResult? Function( _SaveLocation value)?  saveLocation,TResult? Function( _SaveCloth value)?  saveCloth,TResult? Function( _ChangeCategories value)?  changeCategories,TResult? Function( _ChangeLocations value)?  changeLocations,TResult? Function( _TakePhoto value)?  takePhoto,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Fetch value)?  fetch,TResult? Function( _TitleChanged value)?  titleChanged,TResult? Function( _CommentChanged value)?  commentChanged,TResult? Function( _ChangeCategory value)?  changeCategory,TResult? Function( _ChangeLocation value)?  changeLocation,TResult? Function( _SaveCategory value)?  saveCategory,TResult? Function( _SaveLocation value)?  saveLocation,TResult? Function( _SaveCloth value)?  saveCloth,TResult? Function( _DeleteCloth value)?  deleteCloth,TResult? Function( _ChangeCategories value)?  changeCategories,TResult? Function( _ChangeLocations value)?  changeLocations,TResult? Function( _TakePhoto value)?  takePhoto,}){
 final _that = this;
 switch (_that) {
 case _Fetch() when fetch != null:
@@ -127,7 +129,8 @@ return changeCategory(_that);case _ChangeLocation() when changeLocation != null:
 return changeLocation(_that);case _SaveCategory() when saveCategory != null:
 return saveCategory(_that);case _SaveLocation() when saveLocation != null:
 return saveLocation(_that);case _SaveCloth() when saveCloth != null:
-return saveCloth(_that);case _ChangeCategories() when changeCategories != null:
+return saveCloth(_that);case _DeleteCloth() when deleteCloth != null:
+return deleteCloth(_that);case _ChangeCategories() when changeCategories != null:
 return changeCategories(_that);case _ChangeLocations() when changeLocations != null:
 return changeLocations(_that);case _TakePhoto() when takePhoto != null:
 return takePhoto(_that);case _:
@@ -147,7 +150,7 @@ return takePhoto(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( int? clothId)?  fetch,TResult Function( String title)?  titleChanged,TResult Function( String comment)?  commentChanged,TResult Function( Category? category)?  changeCategory,TResult Function( Location? location)?  changeLocation,TResult Function( String title)?  saveCategory,TResult Function( String title)?  saveLocation,TResult Function()?  saveCloth,TResult Function( List<Category> categories)?  changeCategories,TResult Function( List<Location> locations)?  changeLocations,TResult Function( XFile photo)?  takePhoto,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( int? clothId)?  fetch,TResult Function( String title)?  titleChanged,TResult Function( String comment)?  commentChanged,TResult Function( Category? category)?  changeCategory,TResult Function( Location? location)?  changeLocation,TResult Function( String title)?  saveCategory,TResult Function( String title)?  saveLocation,TResult Function()?  saveCloth,TResult Function()?  deleteCloth,TResult Function( List<Category> categories)?  changeCategories,TResult Function( List<Location> locations)?  changeLocations,TResult Function( XFile photo)?  takePhoto,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Fetch() when fetch != null:
 return fetch(_that.clothId);case _TitleChanged() when titleChanged != null:
@@ -157,7 +160,8 @@ return changeCategory(_that.category);case _ChangeLocation() when changeLocation
 return changeLocation(_that.location);case _SaveCategory() when saveCategory != null:
 return saveCategory(_that.title);case _SaveLocation() when saveLocation != null:
 return saveLocation(_that.title);case _SaveCloth() when saveCloth != null:
-return saveCloth();case _ChangeCategories() when changeCategories != null:
+return saveCloth();case _DeleteCloth() when deleteCloth != null:
+return deleteCloth();case _ChangeCategories() when changeCategories != null:
 return changeCategories(_that.categories);case _ChangeLocations() when changeLocations != null:
 return changeLocations(_that.locations);case _TakePhoto() when takePhoto != null:
 return takePhoto(_that.photo);case _:
@@ -178,7 +182,7 @@ return takePhoto(_that.photo);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( int? clothId)  fetch,required TResult Function( String title)  titleChanged,required TResult Function( String comment)  commentChanged,required TResult Function( Category? category)  changeCategory,required TResult Function( Location? location)  changeLocation,required TResult Function( String title)  saveCategory,required TResult Function( String title)  saveLocation,required TResult Function()  saveCloth,required TResult Function( List<Category> categories)  changeCategories,required TResult Function( List<Location> locations)  changeLocations,required TResult Function( XFile photo)  takePhoto,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( int? clothId)  fetch,required TResult Function( String title)  titleChanged,required TResult Function( String comment)  commentChanged,required TResult Function( Category? category)  changeCategory,required TResult Function( Location? location)  changeLocation,required TResult Function( String title)  saveCategory,required TResult Function( String title)  saveLocation,required TResult Function()  saveCloth,required TResult Function()  deleteCloth,required TResult Function( List<Category> categories)  changeCategories,required TResult Function( List<Location> locations)  changeLocations,required TResult Function( XFile photo)  takePhoto,}) {final _that = this;
 switch (_that) {
 case _Fetch():
 return fetch(_that.clothId);case _TitleChanged():
@@ -188,7 +192,8 @@ return changeCategory(_that.category);case _ChangeLocation():
 return changeLocation(_that.location);case _SaveCategory():
 return saveCategory(_that.title);case _SaveLocation():
 return saveLocation(_that.title);case _SaveCloth():
-return saveCloth();case _ChangeCategories():
+return saveCloth();case _DeleteCloth():
+return deleteCloth();case _ChangeCategories():
 return changeCategories(_that.categories);case _ChangeLocations():
 return changeLocations(_that.locations);case _TakePhoto():
 return takePhoto(_that.photo);}
@@ -205,7 +210,7 @@ return takePhoto(_that.photo);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( int? clothId)?  fetch,TResult? Function( String title)?  titleChanged,TResult? Function( String comment)?  commentChanged,TResult? Function( Category? category)?  changeCategory,TResult? Function( Location? location)?  changeLocation,TResult? Function( String title)?  saveCategory,TResult? Function( String title)?  saveLocation,TResult? Function()?  saveCloth,TResult? Function( List<Category> categories)?  changeCategories,TResult? Function( List<Location> locations)?  changeLocations,TResult? Function( XFile photo)?  takePhoto,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( int? clothId)?  fetch,TResult? Function( String title)?  titleChanged,TResult? Function( String comment)?  commentChanged,TResult? Function( Category? category)?  changeCategory,TResult? Function( Location? location)?  changeLocation,TResult? Function( String title)?  saveCategory,TResult? Function( String title)?  saveLocation,TResult? Function()?  saveCloth,TResult? Function()?  deleteCloth,TResult? Function( List<Category> categories)?  changeCategories,TResult? Function( List<Location> locations)?  changeLocations,TResult? Function( XFile photo)?  takePhoto,}) {final _that = this;
 switch (_that) {
 case _Fetch() when fetch != null:
 return fetch(_that.clothId);case _TitleChanged() when titleChanged != null:
@@ -215,7 +220,8 @@ return changeCategory(_that.category);case _ChangeLocation() when changeLocation
 return changeLocation(_that.location);case _SaveCategory() when saveCategory != null:
 return saveCategory(_that.title);case _SaveLocation() when saveLocation != null:
 return saveLocation(_that.title);case _SaveCloth() when saveCloth != null:
-return saveCloth();case _ChangeCategories() when changeCategories != null:
+return saveCloth();case _DeleteCloth() when deleteCloth != null:
+return deleteCloth();case _ChangeCategories() when changeCategories != null:
 return changeCategories(_that.categories);case _ChangeLocations() when changeLocations != null:
 return changeLocations(_that.locations);case _TakePhoto() when takePhoto != null:
 return takePhoto(_that.photo);case _:
@@ -750,6 +756,38 @@ int get hashCode => runtimeType.hashCode;
 @override
 String toString() {
     return 'ClothDetailEvent.saveCloth()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class _DeleteCloth implements ClothDetailEvent {
+  const _DeleteCloth();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _DeleteCloth);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+    return 'ClothDetailEvent.deleteCloth()';
 }
 
 

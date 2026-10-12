@@ -166,4 +166,11 @@ class RepositoryImpl implements Repository {
       comment: comment,
     );
   }
+
+  @override
+  Future<void> deleteCloth(int id) async {
+    await (_db.delete(_db.clothes)
+      ..where((table) => table.id.equals(id)))
+        .go();
+  }
 }

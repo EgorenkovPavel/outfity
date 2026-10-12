@@ -33,6 +33,9 @@ sealed class ClothDetailEvent with _$ClothDetailEvent {
   const factory ClothDetailEvent.saveCloth() =
   _SaveCloth;
 
+  const factory ClothDetailEvent.deleteCloth() =
+  _DeleteCloth;
+
   const factory ClothDetailEvent.changeCategories(
       {required List<Category> categories}) =
   _ChangeCategories;
@@ -109,6 +112,7 @@ class ClothDetailBloc extends Bloc<ClothDetailEvent, ClothDetailState> {
             commentChanged: (event) => _onCommentChange(event, emit),
             takePhoto: (event) => _onTakePhoto(event, emit),
             saveCloth: (event) => _onSaveCloth(event, emit),
+            deleteCloth: (event) => _onDeleteCloth(event, emit),
           ),
     );
 
@@ -269,6 +273,25 @@ class ClothDetailBloc extends Bloc<ClothDetailEvent, ClothDetailState> {
       );
     } catch (error, stackTrace) {
       print(error.toString());
+      addError(error, stackTrace);
+    }
+  }
+
+  Future<void> _onDeleteCloth(_DeleteCloth event, Emitter<ClothDetailState> emit) async {
+    final id = state.id;
+
+    // Нельзя удалить вещь, которая ещё не сохранена.
+    if (id == null) return;
+
+    try {
+      if (state.imagePath != null){
+        await _photoService.delete(state.imagePath);
+      }
+
+      await _repository.deleteCloth(id);
+
+      emit(state.copyWith(isSaved: true));
+    } catch (error, stackTrace) {
       addError(error, stackTrace);
     }
   }

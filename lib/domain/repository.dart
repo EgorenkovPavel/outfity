@@ -33,4 +33,6 @@ abstract interface class Repository {
     required int? locationId,
     required String comment,
   });
+
+  Future<void> deleteCloth(int id);
 }
