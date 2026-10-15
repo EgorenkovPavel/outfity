@@ -1,0 +1,23 @@
+
+{
+  "appTitle": "Outfity",
+
+  "image_placeholder_hint": "Tap to choose image",
+
+  "title": "Title",
+  "category": "Category",
+  "location": "Location",
+  "comment": "Comment",
+
+  "delete_cloth_question_title": "Delete cloth?",
+  "delete_cloth_question": "The item will be removed from the wardrobe. This action cannot be undone.",
+
+  "not_selected": "Not selected",
+
+  "add": "Add",
+  "delete": "Delete",
+  "delete_cloth": "Delete cloth",
+  "take_photo": "Take photo",
+  "choose_from_gallery": "Choose from gallery"
+
+}

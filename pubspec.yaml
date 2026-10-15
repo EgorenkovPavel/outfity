@@ -36,6 +36,9 @@ dependencies:
 
   # IDs
   uuid:
+  flutter_localizations:
+    sdk: flutter
+  intl: ^0.20.3
 
 dev_dependencies:
   flutter_test:
@@ -49,5 +52,5 @@ dev_dependencies:
   drift_dev:
 
 flutter:
-
+  generate: true
   uses-material-design: true

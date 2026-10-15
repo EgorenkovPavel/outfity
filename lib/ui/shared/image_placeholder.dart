@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:outfity/core/photo_service.dart';
 
+import '../../core/extensions.dart';
 import '../../core/injection.dart';
+import '../../l10n/app_localizations.dart';
 
 class ImagePlaceholder extends StatelessWidget {
   final void Function()? onTap;
@@ -30,7 +32,7 @@ class ImagePlaceholder extends StatelessWidget {
                   ),
                   if (onTap != null)
                     Text(
-                      'Tap to choose image', // TODO
+                      context.loc.image_placeholder_hint,
                       style: TextStyle(color: Theme.of(context).primaryColor),
                     ),
                 ],

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:outfity/core/extensions.dart';
 
 class ItemChooser<T> extends StatelessWidget {
   final T? value;
@@ -39,7 +40,7 @@ class ItemChooser<T> extends StatelessWidget {
                 ..insert(
                   0,
                   DropdownMenuItem(
-                    value: null, child: Text('Not selected', //TODO
+                    value: null, child: Text(context.loc.not_selected,
                     ),
                   ),
                 ),

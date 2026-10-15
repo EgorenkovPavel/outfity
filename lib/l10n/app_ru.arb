@@ -1,0 +1,22 @@
+
+{
+  "appTitle": "Outfity",
+
+  "image_placeholder_hint": "Нажмите чтобы выбрать фото",
+
+  "title": "Название",
+  "category": "Категория",
+  "location": "Место",
+  "comment": "Комментарий",
+
+  "delete_cloth_question_title": "Удалить вещь?",
+  "delete_cloth_question": "Вещь будет удалена из гардероба. Это действие нельзя отменить.",
+
+  "not_selected": "Не выбрано",
+
+  "add": "Добавить",
+  "delete": "Удалить",
+  "delete_cloth": "Удалить вещь",
+  "take_photo": "Сделать фото",
+  "choose_from_gallery": "Выбрать из галлереи"
+}

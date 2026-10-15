@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:outfity/core/extensions.dart';
 import 'package:outfity/domain/models.dart';
 import 'package:outfity/ui/cloth_detail_page/cloth_detail_bloc.dart';
 
@@ -47,14 +48,14 @@ class _ClothDetailPageState extends State<ClothDetailPage> {
             children: [
               ListTile(
                 leading: const Icon(Icons.camera_alt),
-                title: const Text('Take photo'), // TODO
+                title: Text(context.loc.take_photo),
                 onTap: () async {
                   Navigator.pop(context, ImageSource.camera);
                 },
               ),
               ListTile(
                 leading: const Icon(Icons.photo_library),
-                title: const Text('Choose from gallery'), // TODO
+                title: Text(context.loc.choose_from_gallery),
                 onTap: () async {
                   Navigator.pop(context, ImageSource.gallery);
                 },
@@ -129,8 +130,7 @@ class _ClothDetailPageState extends State<ClothDetailPage> {
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),
-              child: const Text('Cancel' // TODO
-              ),
+              child: Text(context.materialLoc.cancelButtonLabel),
             ),
             FilledButton(
               onPressed: () {
@@ -140,8 +140,7 @@ class _ClothDetailPageState extends State<ClothDetailPage> {
                   Navigator.pop(context, name);
                 }
               },
-              child: const Text('Add' // TODO
-              ),
+              child: Text(context.loc.add),
             ),
           ],
         );
@@ -167,19 +166,16 @@ class _ClothDetailPageState extends State<ClothDetailPage> {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (dialogContext) => AlertDialog(
-        title: const Text('Удалить вещь?'), // TODO
-        content: const Text(
-          'Вещь будет удалена из гардероба. ' // TODO
-              'Это действие нельзя отменить.',
-        ),
+        title: Text(context.loc.delete_cloth_question_title),
+        content: Text(context.loc.delete_cloth_question),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(dialogContext, false),
-            child: const Text('Отмена'),
+            child: Text(context.materialLoc.cancelButtonLabel),
           ),
           FilledButton(
             onPressed: () => Navigator.pop(dialogContext, true),
-            child: const Text('Удалить'),
+            child: Text(context.loc.delete),
           ),
         ],
       ),
@@ -223,7 +219,7 @@ class _ClothDetailPageState extends State<ClothDetailPage> {
               color: Theme
                   .of(context)
                   .primaryColor,),
-              tooltip: 'Удалить вещь', // TODO
+              tooltip: context.loc.delete_cloth,
             ),
         ],
       ),
@@ -243,7 +239,7 @@ class _ClothDetailPageState extends State<ClothDetailPage> {
               SizedBox(height: 16.0,),
               InputField(
                 controller: _titleController,
-                title: 'Title', // TODO
+                title: context.loc.title,
                 lines: 1,
                 onChanged: (value) {
                   context.read<ClothDetailBloc>().add(
@@ -251,8 +247,7 @@ class _ClothDetailPageState extends State<ClothDetailPage> {
                   );
                 },),
               ItemChooser<Category>(
-                title: 'Category',
-                // TODO
+                title: context.loc.category,
                 value: context
                     .watch<ClothDetailBloc>()
                     .state
@@ -272,8 +267,7 @@ class _ClothDetailPageState extends State<ClothDetailPage> {
                     .watch<ClothDetailBloc>()
                     .state
                     .location,
-                title: 'Location',
-                // TODO
+                title: context.loc.location,
                 items: context
                     .watch<ClothDetailBloc>()
                     .state
@@ -285,7 +279,7 @@ class _ClothDetailPageState extends State<ClothDetailPage> {
                 onAdd: onAddLocation,
               ),
               InputField(
-                title: 'Comment', // TODO
+                title: context.loc.comment,
                 controller: _commentController,
                 lines: 3,
                 onChanged: (value) {
@@ -302,7 +296,7 @@ class _ClothDetailPageState extends State<ClothDetailPage> {
         children: [
           TextButton(
             onPressed: () => onSave(context),
-            child: Text('SAVE'), // TODO
+            child: Text(context.materialLoc.saveButtonLabel),
           ),
         ],
       ),
