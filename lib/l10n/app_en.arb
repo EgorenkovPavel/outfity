@@ -13,9 +13,13 @@
   "delete_cloth_question": "The item will be removed from the wardrobe. This action cannot be undone.",
 
   "not_selected": "Not selected",
+  "nothing_found": "Nothing found",
 
   "add": "Add",
   "delete": "Delete",
+  "reset_filters": "Reset filters",
+  "new_cloth": "New cloth",
+  "edit_cloth": "Edit cloth",
   "delete_cloth": "Delete cloth",
   "take_photo": "Take photo",
   "choose_from_gallery": "Choose from gallery"

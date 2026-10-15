@@ -13,9 +13,13 @@
   "delete_cloth_question": "Вещь будет удалена из гардероба. Это действие нельзя отменить.",
 
   "not_selected": "Не выбрано",
+  "nothing_found": "Ничего не найдено",
 
   "add": "Добавить",
   "delete": "Удалить",
+  "reset_filters": "Сбросить фильтры",
+  "new_cloth": "Новая вещь",
+  "edit_cloth": "Изменить вещь",
   "delete_cloth": "Удалить вещь",
   "take_photo": "Сделать фото",
   "choose_from_gallery": "Выбрать из галлереи"

@@ -204,103 +204,105 @@ class _ClothDetailPageState extends State<ClothDetailPage> {
               Navigator.pop(context);
             },)
         ], child: Scaffold(
-      appBar: AppBar(
-        title: Text(context
-            .watch<ClothDetailBloc>()
-            .state
-            .pageTitle),
-        actions: [
-          if (context.select(
-                (ClothDetailBloc bloc) => bloc.state.id != null,
-          ))
-            IconButton(
-              onPressed: onDelete,
-              icon: Icon(Icons.delete_outline,
-              color: Theme
-                  .of(context)
-                  .primaryColor,),
-              tooltip: context.loc.delete_cloth,
-            ),
-        ],
-      ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(
-            horizontal: 16.0, vertical: 8.0),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              AspectRatio(aspectRatio: 1,
-                  child: ImagePlaceholder(
-                      onTap: () => onImageChoose(context),
-                      imagePath: context
+          appBar: AppBar(
+            title: Text(context
+                .watch<ClothDetailBloc>()
+                .state
+                .id == null ? context.loc.new_cloth : context.loc.edit_cloth),
+            actions: [
+              if (context.select(
+                    (ClothDetailBloc bloc) => bloc.state.id != null,
+              ))
+                IconButton(
+                  onPressed: onDelete,
+                  icon: Icon(Icons.delete_outline,
+                    color: Theme
+                        .of(context)
+                        .primaryColor,),
+                  tooltip: context.loc.delete_cloth,
+                ),
+            ],
+          ),
+          body: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                  horizontal: 16.0, vertical: 8.0),
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    AspectRatio(aspectRatio: 1,
+                        child: ImagePlaceholder(
+                            onTap: () => onImageChoose(context),
+                            imagePath: context
+                                .watch<ClothDetailBloc>()
+                                .state
+                                .viewPhoto)),
+                    SizedBox(height: 16.0,),
+                    InputField(
+                      controller: _titleController,
+                      title: context.loc.title,
+                      lines: 1,
+                      onChanged: (value) {
+                        context.read<ClothDetailBloc>().add(
+                          ClothDetailEvent.titleChanged(value),
+                        );
+                      },),
+                    ItemChooser<Category>(
+                      title: context.loc.category,
+                      value: context
                           .watch<ClothDetailBloc>()
                           .state
-                          .viewPhoto)),
-              SizedBox(height: 16.0,),
-              InputField(
-                controller: _titleController,
-                title: context.loc.title,
-                lines: 1,
-                onChanged: (value) {
-                  context.read<ClothDetailBloc>().add(
-                    ClothDetailEvent.titleChanged(value),
-                  );
-                },),
-              ItemChooser<Category>(
-                title: context.loc.category,
-                value: context
-                    .watch<ClothDetailBloc>()
-                    .state
-                    .category,
-                items: context
-                    .watch<ClothDetailBloc>()
-                    .state
-                    .categories,
-                getTitle: (cat) => cat.title,
-                onChange: (cat) =>
-                    context.read<ClothDetailBloc>().add(
-                        ClothDetailEvent.changeCategory(category: cat)),
-                onAdd: onAddCategory,
-              ),
-              ItemChooser<Location>(
-                value: context
-                    .watch<ClothDetailBloc>()
-                    .state
-                    .location,
-                title: context.loc.location,
-                items: context
-                    .watch<ClothDetailBloc>()
-                    .state
-                    .locations,
-                getTitle: (loc) => loc.title,
-                onChange: (loc) =>
-                    context.read<ClothDetailBloc>().add(
-                        ClothDetailEvent.changeLocation(location: loc)),
-                onAdd: onAddLocation,
-              ),
-              InputField(
-                title: context.loc.comment,
-                controller: _commentController,
-                lines: 3,
-                onChanged: (value) {
-                  context.read<ClothDetailBloc>().add(
-                    ClothDetailEvent.commentChanged(value),
-                  );
-                },
+                          .category,
+                      items: context
+                          .watch<ClothDetailBloc>()
+                          .state
+                          .categories,
+                      getTitle: (cat) => cat.title,
+                      onChange: (cat) =>
+                          context.read<ClothDetailBloc>().add(
+                              ClothDetailEvent.changeCategory(category: cat)),
+                      onAdd: onAddCategory,
+                    ),
+                    ItemChooser<Location>(
+                      value: context
+                          .watch<ClothDetailBloc>()
+                          .state
+                          .location,
+                      title: context.loc.location,
+                      items: context
+                          .watch<ClothDetailBloc>()
+                          .state
+                          .locations,
+                      getTitle: (loc) => loc.title,
+                      onChange: (loc) =>
+                          context.read<ClothDetailBloc>().add(
+                              ClothDetailEvent.changeLocation(location: loc)),
+                      onAdd: onAddLocation,
+                    ),
+                    InputField(
+                      title: context.loc.comment,
+                      controller: _commentController,
+                      lines: 3,
+                      onChanged: (value) {
+                        context.read<ClothDetailBloc>().add(
+                          ClothDetailEvent.commentChanged(value),
+                        );
+                      },
+                    ),
+                  ],
+                ),
+              ),),
+          ),
+          bottomNavigationBar: OverflowBar(
+            alignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              TextButton(
+                onPressed: () => onSave(context),
+                child: Text(context.materialLoc.saveButtonLabel),
               ),
             ],
           ),
-        ),),
-      bottomNavigationBar: OverflowBar(
-        alignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          TextButton(
-            onPressed: () => onSave(context),
-            child: Text(context.materialLoc.saveButtonLabel),
-          ),
-        ],
-      ),
-    ));
+        ));
   }
 }
 

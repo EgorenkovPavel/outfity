@@ -38,10 +38,22 @@ class AppLocalizationsEn extends AppLocalizations {
   String get not_selected => 'Not selected';
 
   @override
+  String get nothing_found => 'Nothing found';
+
+  @override
   String get add => 'Add';
 
   @override
   String get delete => 'Delete';
+
+  @override
+  String get reset_filters => 'Reset filters';
+
+  @override
+  String get new_cloth => 'New cloth';
+
+  @override
+  String get edit_cloth => 'Edit cloth';
 
   @override
   String get delete_cloth => 'Delete cloth';

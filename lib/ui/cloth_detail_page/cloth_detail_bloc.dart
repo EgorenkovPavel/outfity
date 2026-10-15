@@ -54,7 +54,6 @@ abstract class ClothDetailState with _$ClothDetailState {
 
   const factory ClothDetailState({
     required int? id,
-    required String pageTitle,
     required String title,
     required String comment,
     required Category? category,
@@ -87,7 +86,6 @@ class ClothDetailBloc extends Bloc<ClothDetailEvent, ClothDetailState> {
       : super(
     ClothDetailState(
       id: null,
-      pageTitle: '',
       title: '',
       comment: '',
       category: null,
@@ -127,9 +125,7 @@ class ClothDetailBloc extends Bloc<ClothDetailEvent, ClothDetailState> {
 
   Future<void> _fetch(_Fetch event, Emitter<ClothDetailState> emit) async {
     final clothId = event.clothId;
-    if (clothId == null) {
-      emit(state.copyWith(pageTitle: 'New'));
-    } else {
+    if (clothId != null) {
       final cloth = await _repository.findClothById(clothId);
 
       final categoryId = cloth?.categoryId;
@@ -145,7 +141,6 @@ class ClothDetailBloc extends Bloc<ClothDetailEvent, ClothDetailState> {
       emit(
         state.copyWith(
           id: clothId,
-          pageTitle: 'Edit',
           title: cloth?.title ?? '',
           comment: cloth?.comment ?? '',
           imagePath: cloth?.imagePath,
@@ -272,7 +267,6 @@ class ClothDetailBloc extends Bloc<ClothDetailEvent, ClothDetailState> {
         ),
       );
     } catch (error, stackTrace) {
-      print(error.toString());
       addError(error, stackTrace);
     }
   }

@@ -38,10 +38,22 @@ class AppLocalizationsRu extends AppLocalizations {
   String get not_selected => 'Не выбрано';
 
   @override
+  String get nothing_found => 'Ничего не найдено';
+
+  @override
   String get add => 'Добавить';
 
   @override
   String get delete => 'Удалить';
+
+  @override
+  String get reset_filters => 'Сбросить фильтры';
+
+  @override
+  String get new_cloth => 'Новая вещь';
+
+  @override
+  String get edit_cloth => 'Изменить вещь';
 
   @override
   String get delete_cloth => 'Удалить вещь';

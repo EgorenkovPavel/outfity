@@ -152,6 +152,12 @@ abstract class AppLocalizations {
   /// **'Не выбрано'**
   String get not_selected;
 
+  /// No description provided for @nothing_found.
+  ///
+  /// In ru, this message translates to:
+  /// **'Ничего не найдено'**
+  String get nothing_found;
+
   /// No description provided for @add.
   ///
   /// In ru, this message translates to:
@@ -163,6 +169,24 @@ abstract class AppLocalizations {
   /// In ru, this message translates to:
   /// **'Удалить'**
   String get delete;
+
+  /// No description provided for @reset_filters.
+  ///
+  /// In ru, this message translates to:
+  /// **'Сбросить фильтры'**
+  String get reset_filters;
+
+  /// No description provided for @new_cloth.
+  ///
+  /// In ru, this message translates to:
+  /// **'Новая вещь'**
+  String get new_cloth;
+
+  /// No description provided for @edit_cloth.
+  ///
+  /// In ru, this message translates to:
+  /// **'Изменить вещь'**
+  String get edit_cloth;
 
   /// No description provided for @delete_cloth.
   ///
