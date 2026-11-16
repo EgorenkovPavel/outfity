@@ -293,16 +293,22 @@ class _ClothDetailPageState extends State<ClothDetailPage> {
                 ),
               ),),
           ),
-          bottomNavigationBar: OverflowBar(
-            alignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              TextButton(
-                onPressed: () => onSave(context),
-                child: Text(context.materialLoc.saveButtonLabel),
-              ),
-            ],
+      bottomNavigationBar: SafeArea(
+        top: false,
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(16, 8, 16, 12),
+          child: SizedBox(
+            width: double.infinity,
+            child: FilledButton(
+              onPressed: () => onSave(context),
+              child: Text(context.materialLoc.saveButtonLabel),
+            ),
           ),
-        ));
+        ),
+      ),
+
+    )
+    );
   }
 }
 
