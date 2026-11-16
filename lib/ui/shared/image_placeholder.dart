@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:outfity/core/photo_service.dart';
 
 import '../../core/extensions.dart';
